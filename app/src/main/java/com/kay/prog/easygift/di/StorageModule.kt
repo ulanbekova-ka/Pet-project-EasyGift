@@ -13,7 +13,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class StorageModule {
 
-
     @Provides
     fun provideUserDao(appDatabase: AppDatabase) = appDatabase.userDao()
 

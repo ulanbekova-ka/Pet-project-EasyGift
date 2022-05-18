@@ -34,10 +34,6 @@ open class BaseFragment<viewModel: ViewModel, viewBinding: ViewBinding>(
         return binding.root
     }
 
-    open fun showLoading(){
-
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -48,11 +48,14 @@ class NetworkModule {
 
     private fun createRetrofit(httpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(httpClient)
             .build()
     }
 
+    companion object {
+        private const val BASE_URL = "https://benignsurprise.backendless.app/"
+    }
 }

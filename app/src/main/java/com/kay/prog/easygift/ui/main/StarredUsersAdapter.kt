@@ -8,7 +8,7 @@ import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.databinding.ItemStarredUserBinding
 
 class StarredUsersAdapter(
-    private val click: (id: Int) -> Unit
+    private val click: (id: Long) -> Unit
 ) : RecyclerView.Adapter<StarredUsersAdapter.ViewHolder>() {
 
     private var list: List<UserEntity> = listOf()
@@ -33,18 +33,18 @@ class StarredUsersAdapter(
 
     class ViewHolder(
         private val binding : ItemStarredUserBinding,
-        private val click: (id: Int) -> Unit
+        private val click: (id: Long) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(user: UserEntity) {
             binding.apply {
-                Glide.with(itemView.context).load(user.avatarUrl).into(avatar)
-                name.text = user.name
+                Glide.with(itemView.context).load(user.avatar).into(avatar)
+                name.text = user.nickname
                 birthday.text = user.birthday
             }
 
             itemView.setOnClickListener {
-                click.invoke(user.id.toInt())
+                click.invoke(user.id!!)
             }
         }
     }

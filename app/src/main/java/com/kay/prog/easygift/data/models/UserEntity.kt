@@ -6,9 +6,8 @@ import androidx.room.PrimaryKey
 @Entity
 data class UserEntity(
     @PrimaryKey
-    var id: Long,
-    var name: String,
-    var surname: String,
+    var id: Long?,
     var birthday: String,
-    var avatarUrl: String
+    var avatar: String,
+    var nickname: String,
 )

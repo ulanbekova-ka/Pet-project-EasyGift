@@ -17,6 +17,7 @@ open class BaseVM @Inject constructor() : ViewModel() {
     protected val _event by lazy {
         MutableLiveData<BaseEvent>()
     }
+
     val event: LiveData<BaseEvent>
         get() = _event
 

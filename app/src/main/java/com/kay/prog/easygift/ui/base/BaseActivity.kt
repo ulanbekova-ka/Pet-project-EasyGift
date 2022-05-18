@@ -20,13 +20,4 @@ open class BaseActivity<viewModel : BaseVM, viewBinding : ViewBinding>(
         setContentView(binding.root)
         vm = ViewModelProvider(this)[vmClass]
     }
-
-
-    private fun showLoading() {
-
-    }
-
-    private fun hideLoading() {
-
-    }
 }

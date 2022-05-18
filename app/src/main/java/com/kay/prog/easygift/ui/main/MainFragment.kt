@@ -2,7 +2,9 @@ package com.kay.prog.easygift.ui.main
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import com.kay.prog.easygift.R
 import com.kay.prog.easygift.databinding.FragmentMainBinding
 import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.base.BaseFragment
@@ -39,8 +41,11 @@ class MainFragment: BaseFragment<MainVM, FragmentMainBinding>(
     private fun setupViews() {
         with(binding) {
             usersAdapter = StarredUsersAdapter {
-                onClick(it)
+//                fragmentListener.openFragment(DetailsFragment.newInstance(it))
+                showToast(it.toString())
             }
+
+            recycler.adapter = usersAdapter
 
             swipeRefresh.setOnRefreshListener {
                 vm.getUsers()
@@ -58,19 +63,8 @@ class MainFragment: BaseFragment<MainVM, FragmentMainBinding>(
                 is LoadingEvent.ShowToast -> showToast(getString(it.resId))
                 is LoadingEvent.ShowLoading -> binding.swipeRefresh.isRefreshing = true
                 is LoadingEvent.StopLoading -> binding.swipeRefresh.isRefreshing = false
-                else -> showToast("Something went wrong")
+                else -> Log.e("DEBUG", getString(R.string.unknown_error))
             }
         }
-    }
-
-    private fun onClick(index: Int) {
-        vm.getUserByIndex(index).let {
-//            fragmentListener.openFragment(DetailsFragment.newInstance(it.id))
-            showToast(it.toString())
-        }
-    }
-
-    override fun showLoading() {
-
     }
 }

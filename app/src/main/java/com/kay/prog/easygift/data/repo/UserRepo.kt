@@ -10,7 +10,11 @@ class UserRepo @Inject constructor(
     private var userApi: UserApi
 ) {
 
-    fun getUserFromApi() = userApi.getUsers()
+    fun getUsersFromApi() = userApi.getUsers()
 
-    fun saveUsersToDb(users: List<UserEntity>) = userDao.insertUsers(users)
+    fun saveUsersToDb(users: List<UserEntity>) {
+        userDao.insertList(users)
+    }
+
+    fun getUsersFromDB() = userDao.getAll()
 }

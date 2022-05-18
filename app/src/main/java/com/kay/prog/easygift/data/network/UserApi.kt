@@ -1,11 +1,22 @@
 package com.kay.prog.easygift.data.network
 
-import io.reactivex.Single
 import com.kay.prog.easygift.data.models.UserDto
-import retrofit2.http.GET
+import io.reactivex.Observable
+import retrofit2.http.*
 
 interface UserApi {
 
-    @GET("example/get_users")
-    fun getUsers(): Single<List<UserDto>>
+    @GET("api/data/User")
+    fun getUsers(): Observable<List<UserDto>>
+
+    @POST("api/data/User")
+    fun saveUser(
+        @Body user: UserDto
+    ): Observable<Unit>
+
+    @PUT("api/data/User/{objectId}")
+    fun updateUser(
+        @Path("objectId") objectId: String,
+        @Body user: UserDto
+    ): Observable<Unit>
 }
