@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.kay.prog.easygift.R
 import com.kay.prog.easygift.databinding.FragmentProfileBinding
 import com.kay.prog.easygift.extensions.showToast
@@ -62,7 +64,11 @@ class ProfileFragment: BaseFragment< ProfileVM, FragmentProfileBinding>(
             vm.setNickname(it.nickname)
 
             with(binding) {
-                Glide.with(requireContext()).load(it.avatar?: R.drawable.ic_avatar).into(profAvatar)
+                Glide.with(requireContext())
+                    .load(it.avatar?: R.drawable.ic_avatar)
+                    .centerCrop()
+                    .apply(RequestOptions.bitmapTransform(RoundedCorners(12)))
+                    .into(profAvatar)
                 nickname.text = it.nickname
                 birthday.text = it.birthday
                 fullName.text = getString(R.string.full_name, it.name, it.surname)
