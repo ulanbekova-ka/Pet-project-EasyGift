@@ -5,4 +5,7 @@
     <string name="unknown_error"> UNKNOWN ERROR</string>
     <string name="loading"> LOADING</string>
     <string name="finished_loading">LOADING STOPPED</string>
+
+    <string name="full_name">%s %s</string>
+    <string name="price">%f сом</string>
 </resources>

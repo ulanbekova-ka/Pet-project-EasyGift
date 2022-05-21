@@ -2,13 +2,15 @@ package com.kay.prog.easygift.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kay.prog.easygift.R
 import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.databinding.ItemStarredUserBinding
 
 class StarredUsersAdapter(
-    private val click: (id: Long) -> Unit
+    private val click: (user: UserEntity) -> Unit
 ) : RecyclerView.Adapter<StarredUsersAdapter.ViewHolder>() {
 
     private var list: List<UserEntity> = listOf()
@@ -33,18 +35,19 @@ class StarredUsersAdapter(
 
     class ViewHolder(
         private val binding : ItemStarredUserBinding,
-        private val click: (id: Long) -> Unit
+        private val click: (user: UserEntity) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(user: UserEntity) {
             binding.apply {
-                Glide.with(itemView.context).load(user.avatar).into(avatar)
+                val icon = user.avatar ?: ContextCompat.getDrawable(itemView.context, R.drawable.ic_avatar)
+                Glide.with(itemView.context).load(icon).into(avatar)
                 name.text = user.nickname
                 birthday.text = user.birthday
             }
 
             itemView.setOnClickListener {
-                click.invoke(user.id!!)
+                click.invoke(user)
             }
         }
     }

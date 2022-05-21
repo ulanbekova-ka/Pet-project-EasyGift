@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import com.kay.prog.easygift.BuildConfig
-import com.kay.prog.easygift.data.network.UserApi
+import com.kay.prog.easygift.data.network.BackendlessApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -19,7 +19,7 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Provides
-    fun provideUserApi(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
+    fun provideUserApi(retrofit: Retrofit): BackendlessApi = retrofit.create(BackendlessApi::class.java)
 
     @Provides
     @Singleton

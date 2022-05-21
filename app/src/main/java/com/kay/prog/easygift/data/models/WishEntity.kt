@@ -4,14 +4,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class UserEntity(
+data class WishEntity (
     @PrimaryKey
     var id: Long?,
-    var birthday: String,
-    var avatar: String?,
     var nickname: String,
-    var name: String,
-    var surname: String,
-    var email: String,
-    var password: String
+    var description: String,
+    var webpage: String?,
+    var price: Double?,
+    var created: String,
+    var updated: String?
 )

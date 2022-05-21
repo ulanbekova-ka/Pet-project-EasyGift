@@ -1,35 +1,41 @@
-package com.kay.prog.easygift.ui.main
+package com.kay.prog.easygift.ui.profile
 
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.bumptech.glide.Glide
 import com.kay.prog.easygift.R
-import com.kay.prog.easygift.databinding.FragmentMainBinding
+import com.kay.prog.easygift.databinding.FragmentProfileBinding
 import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.base.BaseFragment
 import com.kay.prog.easygift.ui.base.FragmentListener
 import com.kay.prog.easygift.ui.base.LoadingEvent
-import com.kay.prog.easygift.ui.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment: BaseFragment<MainVM, FragmentMainBinding>(
-    MainVM::class.java,
+class ProfileFragment: BaseFragment< ProfileVM, FragmentProfileBinding>(
+    ProfileVM::class.java,
     {
-        FragmentMainBinding.inflate(it)
+        FragmentProfileBinding.inflate(it)
     }
 ) {
 
     private lateinit var fragmentListener: FragmentListener
 
-    private lateinit var usersAdapter: StarredUsersAdapter
+    private lateinit var adapter: WishesAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
             fragmentListener = context as FragmentListener
         } catch (e: Exception){ print("Activity must implement FragmentListener")}
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        vm.setId(arguments?.getLong(KEY_ID) ?: 1)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,21 +47,30 @@ class MainFragment: BaseFragment<MainVM, FragmentMainBinding>(
 
     private fun setupViews() {
         with(binding) {
-            usersAdapter = StarredUsersAdapter {
-                fragmentListener.openFragment(ProfileFragment.newInstance(it.id!!))
-            }
+            adapter = WishesAdapter()
 
-            recycler.adapter = usersAdapter
+            recycler.adapter = adapter
 
             swipeRefresh.setOnRefreshListener {
-                vm.getUsers()
+                vm.getWishes()
             }
         }
     }
 
-    private fun subscribeToLiveData(){
-        vm.users.observe(viewLifecycleOwner) {
-            usersAdapter.setData(it)
+    private fun subscribeToLiveData() {
+        vm.user.observe(viewLifecycleOwner) {
+            vm.setNickname(it.nickname)
+
+            with(binding) {
+                Glide.with(requireContext()).load(it.avatar?: R.drawable.ic_avatar).into(profAvatar)
+                nickname.text = it.nickname
+                birthday.text = it.birthday
+                fullName.text = getString(R.string.full_name, it.name, it.surname)
+            }
+        }
+
+        vm.wishList.observe(viewLifecycleOwner) {
+            adapter.setData(it)
         }
 
         vm.event.observe(viewLifecycleOwner) {
@@ -65,6 +80,15 @@ class MainFragment: BaseFragment<MainVM, FragmentMainBinding>(
                 is LoadingEvent.StopLoading -> binding.swipeRefresh.isRefreshing = false
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))
             }
+        }
+    }
+
+    companion object {
+        private const val KEY_ID = "id"
+
+        fun newInstance(id: Long): ProfileFragment {
+            val args = Bundle().apply { putLong(KEY_ID, id) }
+            return ProfileFragment().apply { arguments = args }
         }
     }
 }
