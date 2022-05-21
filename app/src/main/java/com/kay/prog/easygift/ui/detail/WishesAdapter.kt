@@ -1,4 +1,4 @@
-package com.kay.prog.easygift.ui.profile
+package com.kay.prog.easygift.ui.detail
 
 import android.view.LayoutInflater
 import android.view.View

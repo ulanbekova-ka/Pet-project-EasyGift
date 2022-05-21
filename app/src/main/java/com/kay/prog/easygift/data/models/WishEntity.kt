@@ -10,7 +10,5 @@ data class WishEntity (
     var nickname: String,
     var description: String,
     var webpage: String?,
-    var price: Double?,
-    var created: String,
-    var updated: String?
+    var price: Double?
 )

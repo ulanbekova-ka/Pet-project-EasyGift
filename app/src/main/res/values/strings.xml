@@ -13,4 +13,13 @@
     <string name="search">search</string>
     <string name="create">create</string>
     <string name="profile">profile</string>
+    <string name="search_hint">type nickname</string>
+    <string name="find">find</string>
+    <string name="hint_nickname">type nickname</string>
+    <string name="hint_password">type password</string>
+    <string name="btn_continue">Continue</string>
+    <string name="greeting">Добро пожаловать!</string>
+    <string name="auth_btn">Войти</string>
+    <string name="reg_btn">Зарегистрироваться</string>
+    <string name="un_subscribe">Подписаться/Отписаться</string>
 </resources>

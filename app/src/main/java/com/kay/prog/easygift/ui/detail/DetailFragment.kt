@@ -1,14 +1,12 @@
-package com.kay.prog.easygift.ui.profile
+package com.kay.prog.easygift.ui.detail
 
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.kay.prog.easygift.R
-import com.kay.prog.easygift.databinding.FragmentProfileBinding
+import com.kay.prog.easygift.databinding.FragmentDetailBinding
 import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.base.BaseFragment
 import com.kay.prog.easygift.ui.base.FragmentListener
@@ -16,10 +14,10 @@ import com.kay.prog.easygift.ui.base.LoadingEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileFragment: BaseFragment< ProfileVM, FragmentProfileBinding>(
-    ProfileVM::class.java,
+class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
+    DetailVM::class.java,
     {
-        FragmentProfileBinding.inflate(it)
+        FragmentDetailBinding.inflate(it)
     }
 ) {
 
@@ -56,6 +54,12 @@ class ProfileFragment: BaseFragment< ProfileVM, FragmentProfileBinding>(
             swipeRefresh.setOnRefreshListener {
                 vm.getWishes()
             }
+
+            subscribeBtn.setOnClickListener {
+                //TODO
+                showToast("Отписка прошла успешно")
+                showToast("Подписка прошла успешно")
+            }
         }
     }
 
@@ -66,9 +70,8 @@ class ProfileFragment: BaseFragment< ProfileVM, FragmentProfileBinding>(
             with(binding) {
                 Glide.with(requireContext())
                     .load(it.avatar?: R.drawable.ic_avatar)
-                    .centerCrop()
-                    .apply(RequestOptions.bitmapTransform(RoundedCorners(12)))
                     .into(profAvatar)
+
                 nickname.text = it.nickname
                 birthday.text = it.birthday
                 fullName.text = getString(R.string.full_name, it.name, it.surname)
@@ -92,9 +95,9 @@ class ProfileFragment: BaseFragment< ProfileVM, FragmentProfileBinding>(
     companion object {
         private const val KEY_ID = "id"
 
-        fun newInstance(id: Long): ProfileFragment {
+        fun newInstance(id: Long): DetailFragment {
             val args = Bundle().apply { putLong(KEY_ID, id) }
-            return ProfileFragment().apply { arguments = args }
+            return DetailFragment().apply { arguments = args }
         }
     }
 }

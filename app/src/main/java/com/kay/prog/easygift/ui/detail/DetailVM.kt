@@ -1,4 +1,4 @@
-package com.kay.prog.easygift.ui.profile
+package com.kay.prog.easygift.ui.detail
 
 import androidx.lifecycle.LiveData
 import com.kay.prog.easygift.data.models.UserEntity
@@ -12,7 +12,7 @@ import com.kay.prog.easygift.ui.base.LoadingEvent
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileVM @Inject constructor(
+class DetailVM @Inject constructor(
     private val getUserInfoUseCase: GetUserInfoUseCase,
     private val getWishesUseCase: GetWishesUseCase,
     private val getWishesByNicknameUseCase: GetWishesByNicknameUseCase

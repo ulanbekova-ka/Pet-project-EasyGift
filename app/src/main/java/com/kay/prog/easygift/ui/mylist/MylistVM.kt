@@ -1,4 +1,4 @@
-package com.kay.prog.easygift.ui.main
+package com.kay.prog.easygift.ui.mylist
 
 import androidx.lifecycle.LiveData
 import com.kay.prog.easygift.data.models.UserEntity
@@ -10,7 +10,7 @@ import com.kay.prog.easygift.ui.base.LoadingEvent
 import javax.inject.Inject
 
 @HiltViewModel
-class MainVM @Inject constructor(
+class MylistVM @Inject constructor(
     private val getUsersAsLiveUseCase : GetUsersAsLiveUseCase,
     private val getUsersUseCase: GetUsersUseCase
 ): BaseVM() {

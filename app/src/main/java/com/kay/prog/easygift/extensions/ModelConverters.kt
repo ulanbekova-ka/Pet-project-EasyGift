@@ -24,8 +24,6 @@ fun WishDto.toWishEntity(): WishEntity {
         nickname,
         description,
         webpage,
-        price,
-        created,
-        updated
+        price
     )
 }

@@ -8,5 +8,6 @@ data class UserDto(
     var name: String,
     var surname: String,
     var email: String,
-    var password: String
+    var password: String,
+    var objectId: String
 )

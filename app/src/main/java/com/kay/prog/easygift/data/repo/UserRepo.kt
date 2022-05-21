@@ -18,6 +18,8 @@ class UserRepo @Inject constructor(
         userDao.insertList(users)
     }
 
+    fun getUsersByNickname(nickname: String) = userDao.getUsersByNickname(nickname)
+
     fun clearTable() {
         userDao.clearTable()
     }

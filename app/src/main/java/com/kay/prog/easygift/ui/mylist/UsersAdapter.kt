@@ -1,4 +1,4 @@
-package com.kay.prog.easygift.ui.main
+package com.kay.prog.easygift.ui.mylist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,9 +10,9 @@ import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.databinding.ItemStarredUserBinding
 import com.kay.prog.easygift.extensions.countDaysLeft
 
-class StarredUsersAdapter(
+class UsersAdapter(
     private val click: (user: UserEntity) -> Unit
-) : RecyclerView.Adapter<StarredUsersAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
     private var list: List<UserEntity> = listOf()
 

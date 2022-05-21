@@ -4,40 +4,39 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/greeting"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/nickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:layout_margin="16dp"
-        android:text="@string/greeting"
-        android:gravity="center"
+        android:hint="@string/hint_nickname"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_auth"
+        app:layout_constraintBottom_toTopOf="@id/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_margin="16dp"
+        android:hint="@string/hint_password"
+        app:layout_constraintTop_toBottomOf="@id/nickname"
+        app:layout_constraintBottom_toTopOf="@id/auto_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_auth"
+        android:id="@+id/auto_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:layout_margin="16dp"
-        android:text="@string/auth_btn"
-        app:layout_constraintTop_toBottomOf="@id/greeting"
-        app:layout_constraintBottom_toTopOf="@id/btn_reg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_reg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:layout_margin="16dp"
-        android:text="@string/reg_btn"
-        app:layout_constraintTop_toBottomOf="@id/btn_auth"
+        android:text="@string/btn_continue"
+        app:layout_constraintTop_toBottomOf="@id/password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
