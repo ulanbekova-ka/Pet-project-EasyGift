@@ -18,10 +18,10 @@ class MainVM @Inject constructor(
     val users: LiveData<List<UserEntity>> = getUsersAsLiveUseCase()
 
     init {
-        getUsers()
+        downloadUsers()
     }
 
-    fun getUsers() {
+    fun downloadUsers() {
         _event.value = LoadingEvent.ShowLoading
 
         disposable.add(

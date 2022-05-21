@@ -1,8 +1,10 @@
 package com.kay.prog.easygift.ui.profile
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kay.prog.easygift.R
 import com.kay.prog.easygift.data.models.WishEntity
 import com.kay.prog.easygift.databinding.ItemWishBinding
 
@@ -34,7 +36,22 @@ class WishesAdapter : RecyclerView.Adapter<WishesAdapter.ViewHolder>() {
         fun bind(wish: WishEntity) {
             binding.apply {
                 txt.text = wish.description
-                webpage.text = wish.webpage
+
+                if (wish.webpage == null)
+                {
+                    webpage.visibility = View.GONE
+                }
+                else {
+                    webpage.text = wish.webpage
+                }
+
+                if (wish.price == null)
+                {
+                    price.visibility = View.GONE
+                }
+                else {
+                    price.text = itemView.context.getString(R.string.price, wish.price)
+                }
             }
         }
     }

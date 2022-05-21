@@ -48,7 +48,7 @@ class MainFragment: BaseFragment<MainVM, FragmentMainBinding>(
             recycler.adapter = usersAdapter
 
             swipeRefresh.setOnRefreshListener {
-                vm.getUsers()
+                vm.downloadUsers()
             }
         }
     }

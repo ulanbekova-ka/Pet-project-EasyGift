@@ -25,15 +25,15 @@ class ProfileVM @Inject constructor(
         user = getUserInfoUseCase(id)
     }
 
-    private var nickname: String = ""
+    private var nickname: String = "emil01"
     fun setNickname(nickname: String) {
         this.nickname = nickname
 
-        wishList = getWishesByNicknameUseCase(nickname)
+        //TODO problem with wish list - crashes when looking at app inspector
+//        wishList = getWishesByNicknameUseCase(nickname)
     }
 
     var user: LiveData<UserEntity> = getUserInfoUseCase(id)
-    //NOT SHOWING WISH LIST
     var wishList: LiveData<List<WishEntity>> = getWishesByNicknameUseCase(nickname)
 
     init {

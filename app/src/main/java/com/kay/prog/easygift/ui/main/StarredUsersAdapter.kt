@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.kay.prog.easygift.R
 import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.databinding.ItemStarredUserBinding
+import com.kay.prog.easygift.extensions.countDaysLeft
 
 class StarredUsersAdapter(
     private val click: (user: UserEntity) -> Unit
@@ -43,7 +44,7 @@ class StarredUsersAdapter(
                 val icon = user.avatar ?: ContextCompat.getDrawable(itemView.context, R.drawable.ic_avatar)
                 Glide.with(itemView.context).load(icon).into(avatar)
                 name.text = user.nickname
-                birthday.text = user.birthday
+                birthday.text = itemView.context.getString(R.string.left, countDaysLeft(user.birthday))
             }
 
             itemView.setOnClickListener {
