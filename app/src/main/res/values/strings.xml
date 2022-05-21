@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">EasyGift</string>
+
+    <string name="no_internet">NO INTERNET</string>
+    <string name="unknown_error"> UNKNOWN ERROR</string>
+    <string name="loading"> LOADING</string>
+    <string name="finished_loading">LOADING STOPPED</string>
+
+    <string name="full_name">%s %s</string>
+    <string name="price">%f сом</string>
+    <string name="left">осталось %d дней</string>
+</resources>
