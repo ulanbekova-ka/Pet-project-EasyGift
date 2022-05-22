@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.kay.prog.easygift.R
 import com.kay.prog.easygift.databinding.FragmentProfileBinding
 import com.kay.prog.easygift.extensions.showToast
+import com.kay.prog.easygift.ui.base.AuthEvent
 import com.kay.prog.easygift.ui.base.BaseFragment
 import com.kay.prog.easygift.ui.base.FragmentListener
 import com.kay.prog.easygift.ui.base.LoadingEvent
@@ -23,7 +24,7 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
     }
 ) {
 
-    private lateinit var adapter: WishesAdapter
+    private lateinit var wishesAdapter: WishesAdapter
     private lateinit var fragmentListener: FragmentListener
 
     override fun onAttach(context: Context) {
@@ -33,15 +34,11 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
         } catch (e: Exception) { print("Activity must implement FragmentListener")}
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         vm.setNickname(fragmentListener.getPrefs())
         showToast(fragmentListener.getPrefs())
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         setupViews()
         subscribeToLiveData()
@@ -49,16 +46,16 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
 
     private fun setupViews() {
         with(binding) {
-            adapter = WishesAdapter()
+            wishesAdapter = WishesAdapter()
 
-            recycler.adapter = adapter
+            recycler.adapter = wishesAdapter
 
             swipeRefresh.setOnRefreshListener {
                 vm.getWishes()
                 vm.getUser()
             }
 
-            subscribeBtn.setOnClickListener {
+            changeBtn.setOnClickListener {
                 showToast("Изменить профиль")
             }
 
@@ -71,7 +68,6 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
 
     private fun subscribeToLiveData() {
         vm.user.observe(viewLifecycleOwner) {
-
             with(binding) {
                 Glide.with(requireContext()).load(it.avatar?: R.drawable.ic_avatar).into(profAvatar)
                 nickname.text = it.nickname
@@ -81,11 +77,12 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
         }
 
         vm.wishList.observe(viewLifecycleOwner) {
-            adapter.setData(it)
+            wishesAdapter.setData(it)
         }
 
         vm.event.observe(viewLifecycleOwner) {
             when (it) {
+                is AuthEvent.OnAuthError -> showToast("Can't find user")
                 is LoadingEvent.ShowLoading -> binding.swipeRefresh.isRefreshing = true
                 is LoadingEvent.StopLoading -> binding.swipeRefresh.isRefreshing = false
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))

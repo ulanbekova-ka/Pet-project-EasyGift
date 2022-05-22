@@ -56,9 +56,9 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.nav_home -> openFragment(MylistFragment(), false)
-            R.id.nav_create -> openFragment(CreateWishFragment())
-            R.id.nav_search -> openFragment(SearchFragment())
-            R.id.nav_profile -> openFragment(ProfileFragment())
+            R.id.nav_create -> openFragment(CreateWishFragment(), false)
+            R.id.nav_search -> openFragment(SearchFragment(), false)
+            R.id.nav_profile -> openFragment(ProfileFragment(), false)
         }
         return super.onOptionsItemSelected(item)
     }

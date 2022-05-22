@@ -1,5 +1,6 @@
 package com.kay.prog.easygift.data.repo
 
+import com.kay.prog.easygift.data.models.Wish
 import com.kay.prog.easygift.data.network.BackendlessApi
 import javax.inject.Inject
 
@@ -9,5 +10,5 @@ class WishRepo @Inject constructor(
 
     fun getWishesByNickname(nickname: String) = wishApi.getWishesByNickname(nickname)
 
-    fun getUserByNickname(where: String) = wishApi.getUserByNickname(where)
+    fun createWish(wish: Wish) = wishApi.createWish(wish)
 }

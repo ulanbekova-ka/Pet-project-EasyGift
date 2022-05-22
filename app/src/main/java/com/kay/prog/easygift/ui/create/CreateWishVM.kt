@@ -1,5 +1,7 @@
 package com.kay.prog.easygift.ui.create
 
+import com.kay.prog.easygift.data.models.Wish
+import com.kay.prog.easygift.domain.use_cases.api.CreateWishUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.kay.prog.easygift.ui.base.BaseVM
 import com.kay.prog.easygift.ui.base.RegEvent
@@ -7,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateWishVM @Inject constructor(
-//    private val getUserByNicknameUseCase: GetUserByNicknameUseCase
+    private val createWishUseCase: CreateWishUseCase
 ): BaseVM() {
 
     private var nickname: String = ""
@@ -21,11 +23,13 @@ class CreateWishVM @Inject constructor(
             return
         }
 
-        // TODO save wish! _event.value = RegEvent.OnRegSuccess
-//        disposable.add(
-//
-//        )
-
-        _event.value = RegEvent.OnUnknownError
+        disposable.add(
+            createWishUseCase( Wish(null, nickname, description, url, price) )
+                .subscribe({
+                    _event.value = RegEvent.OnRegSuccess
+                }, {
+                    handleError(it)
+                })
+        )
     }
 }

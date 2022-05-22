@@ -1,7 +1,7 @@
 package com.kay.prog.easygift.ui.registration
 
-import androidx.lifecycle.MutableLiveData
 import com.kay.prog.easygift.data.models.UserEntity
+import com.kay.prog.easygift.domain.use_cases.api.CreateUserUseCase
 import com.kay.prog.easygift.domain.use_cases.api.GetUserByNicknameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.kay.prog.easygift.ui.base.BaseVM
@@ -10,10 +10,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationVM @Inject constructor(
-    private val getUserByNicknameUseCase: GetUserByNicknameUseCase
+    private val getUserByNicknameUseCase: GetUserByNicknameUseCase,
+    private val createUserUseCase: CreateUserUseCase
 ): BaseVM() {
-
-    private val _user = MutableLiveData<UserEntity>()
 
     fun saveUser(
         name: String?, surname: String?, nickname: String?, email: String?, birthday: String?, password: String?
@@ -46,9 +45,15 @@ class RegistrationVM @Inject constructor(
                 })
         )
 
-//        disposable.add(
-            //TODO saveUser
-//        _event.value = RegEvent.OnRegSuccess
-//        )
+        disposable.add(
+            createUserUseCase(
+                UserEntity(null, birthday, null, nickname, name, surname, email, password)
+            )
+                .subscribe({
+                    _event.value = RegEvent.OnRegSuccess
+                }, {
+                    handleError(it)
+                })
+        )
     }
 }

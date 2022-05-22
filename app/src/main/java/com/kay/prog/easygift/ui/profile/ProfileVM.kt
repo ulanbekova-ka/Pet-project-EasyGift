@@ -31,6 +31,10 @@ class ProfileVM @Inject constructor(
     val user: LiveData<UserEntity>
         get() = _user
 
+    private val _wishList = MutableLiveData<List<Wish>>()
+    val wishList: LiveData<List<Wish>>
+        get() = _wishList
+
     fun getUser() {
         disposable.add(
             getUserByNicknameUseCase("nickname='$nickname'")
@@ -45,10 +49,6 @@ class ProfileVM @Inject constructor(
                 })
         )
     }
-
-    private val _wishList = MutableLiveData<List<Wish>>()
-    val wishList: LiveData<List<Wish>>
-        get() = _wishList
 
     fun getWishes() {
         _event.value = LoadingEvent.ShowLoading
