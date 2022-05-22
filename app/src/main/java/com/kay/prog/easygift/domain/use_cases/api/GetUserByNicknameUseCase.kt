@@ -12,7 +12,7 @@ class GetUserByNicknameUseCase @Inject constructor(
     private val wishRepo: WishRepo
 ) {
 
-    operator fun invoke(where: String): Single<UserDto> {
+    operator fun invoke(where: String): Single<List<UserDto>> {
         return wishRepo.getUserByNickname(where)
             .subscribeOn(Schedulers.io())
             .map {

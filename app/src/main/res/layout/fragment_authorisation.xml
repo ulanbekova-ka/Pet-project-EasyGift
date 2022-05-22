@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:layout_margin="16dp"
-        android:hint="@string/hint_nickname"
+        android:hint="@string/search_hint"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/password"

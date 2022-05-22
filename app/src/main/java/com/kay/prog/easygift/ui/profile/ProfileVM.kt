@@ -1,4 +1,4 @@
-package com.kay.prog.easygift.ui.detail
+package com.kay.prog.easygift.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +14,7 @@ import com.kay.prog.easygift.ui.base.LoadingEvent
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailVM @Inject constructor(
+class ProfileVM @Inject constructor(
     private val getUserByNicknameUseCase: GetUserByNicknameUseCase,
     private val getWishesByNicknameUseCase: GetWishesByNicknameUseCase
 ): BaseVM() {
@@ -57,7 +57,7 @@ class DetailVM @Inject constructor(
             getWishesByNicknameUseCase("nickname='$nickname'")
                 .doOnTerminate { _event.value = LoadingEvent.StopLoading }
                 .subscribe({
-                           _wishList.value = it
+                    _wishList.value = it
                 },{
                     handleError(it)
                 })

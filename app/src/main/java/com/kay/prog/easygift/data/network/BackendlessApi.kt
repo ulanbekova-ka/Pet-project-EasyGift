@@ -17,7 +17,7 @@ interface BackendlessApi {
     @GET("User")
     fun getUserByNickname(
         @Query("where") where: String
-    ): Single<UserDto>
+    ): Single<List<UserDto>>
 
 //    @POST("api/data/User")
 //    fun saveUser(

@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import com.kay.prog.easygift.R
 import com.kay.prog.easygift.databinding.FragmentMylistBinding
-import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.base.BaseFragment
 import com.kay.prog.easygift.ui.base.FragmentListener
 import com.kay.prog.easygift.ui.base.LoadingEvent
@@ -21,15 +20,14 @@ class MylistFragment: BaseFragment<MylistVM, FragmentMylistBinding>(
     }
 ) {
 
-    private lateinit var fragmentListener: FragmentListener
-
     private lateinit var usersAdapter: UsersAdapter
+    private lateinit var fragmentListener: FragmentListener
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
             fragmentListener = context as FragmentListener
-        } catch (e: Exception){ print("Activity must implement FragmentListener")}
+        } catch (e: Exception) { print("Activity must implement FragmentListener")}
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,14 +51,13 @@ class MylistFragment: BaseFragment<MylistVM, FragmentMylistBinding>(
         }
     }
 
-    private fun subscribeToLiveData(){
+    private fun subscribeToLiveData() {
         vm.users.observe(viewLifecycleOwner) {
             usersAdapter.setData(it)
         }
 
         vm.event.observe(viewLifecycleOwner) {
             when (it) {
-                is LoadingEvent.ShowToast -> showToast(getString(it.resId))
                 is LoadingEvent.ShowLoading -> binding.swipeRefresh.isRefreshing = true
                 is LoadingEvent.StopLoading -> binding.swipeRefresh.isRefreshing = false
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))

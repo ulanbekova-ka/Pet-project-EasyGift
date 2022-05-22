@@ -1,6 +1,5 @@
 package com.kay.prog.easygift.ui.authorisation
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.domain.use_cases.api.GetUserByNicknameUseCase
@@ -26,10 +25,13 @@ class AuthorisationVM @Inject constructor(
         disposable.add(
             getUserByNicknameUseCase("nickname='$nickname'")
                 .subscribe({
-                    _user.value = it.toUserEntity()
+                    if (it.size == 1) {
+                        _user.value = it[0].toUserEntity()
+                    } else {
+                        _event.value = AuthEvent.OnAuthError
+                    }
                 }, {
-                    _event.value = AuthEvent.OnAuthError
-                    Log.e("ERR", it.toString())
+                    handleError(it)
                 })
         )
 

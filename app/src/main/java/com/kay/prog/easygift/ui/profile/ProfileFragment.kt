@@ -1,4 +1,4 @@
-package com.kay.prog.easygift.ui.detail
+package com.kay.prog.easygift.ui.profile
 
 import android.content.Context
 import android.os.Bundle
@@ -6,18 +6,20 @@ import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
 import com.kay.prog.easygift.R
-import com.kay.prog.easygift.databinding.FragmentDetailBinding
+import com.kay.prog.easygift.databinding.FragmentProfileBinding
 import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.base.BaseFragment
 import com.kay.prog.easygift.ui.base.FragmentListener
 import com.kay.prog.easygift.ui.base.LoadingEvent
+import com.kay.prog.easygift.ui.detail.WishesAdapter
+import com.kay.prog.easygift.ui.main.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
-    DetailVM::class.java,
+class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
+    ProfileVM::class.java,
     {
-        FragmentDetailBinding.inflate(it)
+        FragmentProfileBinding.inflate(it)
     }
 ) {
 
@@ -34,7 +36,8 @@ class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        vm.setNickname(arguments?.getString(KEY_NICK))
+        vm.setNickname(fragmentListener.getPrefs())
+        showToast(fragmentListener.getPrefs())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,7 +59,12 @@ class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
             }
 
             subscribeBtn.setOnClickListener {
-                showToast("Подписка прошла успешно")
+                showToast("Изменить профиль")
+            }
+
+            logOutBtn.setOnClickListener {
+                fragmentListener.openFragment(MainFragment(), false)
+                fragmentListener.deletePrefs()
             }
         }
     }
@@ -82,15 +90,6 @@ class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
                 is LoadingEvent.StopLoading -> binding.swipeRefresh.isRefreshing = false
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))
             }
-        }
-    }
-
-    companion object {
-        private const val KEY_NICK = "nick"
-
-        fun newInstance(nickname: String): DetailFragment {
-            val args = Bundle().apply { putString(KEY_NICK, nickname) }
-            return DetailFragment().apply { arguments = args }
         }
     }
 }

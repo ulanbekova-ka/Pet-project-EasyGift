@@ -23,7 +23,6 @@ class GetUsersFromApiUseCase @Inject constructor(
                 list.toList()
             }
             .map {
-                userRepo.clearTable()
                 userRepo.saveUsersToDb(it)
             }
             .observeOn(AndroidSchedulers.mainThread())

@@ -19,8 +19,4 @@ class UserRepo @Inject constructor(
     fun getUsersFromDB() = userDao.getAll()
 
     fun getUserById(id : Long) = userDao.getUserById(id)
-
-    fun clearTable() {
-        userDao.clearTable()
-    }
 }

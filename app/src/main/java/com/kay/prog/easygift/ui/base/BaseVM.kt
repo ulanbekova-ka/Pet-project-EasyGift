@@ -23,21 +23,6 @@ open class BaseVM @Inject constructor() : ViewModel() {
     val event: LiveData<BaseEvent>
         get() = _event
 
-//    private val _isLoading by lazy {
-//        MutableLiveData(false)
-//    }
-//    val isLoading: LiveData<Boolean>
-//        get() = _isLoading
-//
-//
-//    fun showLoading(){
-//        _isLoading.value = true
-//    }
-//
-//    protected fun hideLoading(){
-//        _isLoading.value = false
-//    }
-
     protected fun handleError(it: Throwable) {
         _event.value = when (it) {
             is UnknownHostException -> LoadingEvent.ShowToast(R.string.no_internet)
