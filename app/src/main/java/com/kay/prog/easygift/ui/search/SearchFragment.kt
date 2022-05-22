@@ -10,7 +10,6 @@ import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.base.BaseFragment
 import com.kay.prog.easygift.ui.base.FragmentListener
 import com.kay.prog.easygift.ui.base.LoadingEvent
-import com.kay.prog.easygift.ui.mylist.UsersAdapter
 import com.kay.prog.easygift.ui.detail.DetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,8 +22,6 @@ class SearchFragment: BaseFragment<SearchVM, FragmentSearchBinding>(
 ) {
 
     private lateinit var fragmentListener: FragmentListener
-
-    private lateinit var usersAdapter: UsersAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,24 +40,14 @@ class SearchFragment: BaseFragment<SearchVM, FragmentSearchBinding>(
     private fun setupViews() {
         with(binding) {
             searchBtn.setOnClickListener {
-                vm.setNickname(searchInput.text.toString())
-            }
-
-            usersAdapter = UsersAdapter {
-                fragmentListener.openFragment(DetailFragment.newInstance(it.id!!))
-            }
-
-            recycler.adapter = usersAdapter
-
-            swipeRefresh.setOnRefreshListener {
-                vm.downloadUsers()
+                vm.findUser(searchInput.text.toString())
             }
         }
     }
 
     private fun subscribeToLiveData() {
-        vm.users.observe(viewLifecycleOwner) {
-            usersAdapter.setData(it)
+        vm.user.observe(viewLifecycleOwner) {
+            fragmentListener.openFragment(DetailFragment.newInstance(it.nickname))
         }
 
         vm.event.observe(viewLifecycleOwner) {

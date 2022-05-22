@@ -1,4 +1,4 @@
-package com.kay.prog.easygift.domain.use_cases
+package com.kay.prog.easygift.domain.use_cases.api
 
 import com.kay.prog.easygift.data.models.UserEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -8,7 +8,7 @@ import com.kay.prog.easygift.extensions.toUserEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetUsersUseCase @Inject constructor(
+class GetUsersFromApiUseCase @Inject constructor(
     private val userRepo: UserRepo
 ) {
 

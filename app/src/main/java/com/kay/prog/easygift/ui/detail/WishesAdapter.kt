@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kay.prog.easygift.R
-import com.kay.prog.easygift.data.models.WishEntity
+import com.kay.prog.easygift.data.models.Wish
 import com.kay.prog.easygift.databinding.ItemWishBinding
 
 class WishesAdapter : RecyclerView.Adapter<WishesAdapter.ViewHolder>() {
-    private var list: List<WishEntity> = listOf()
+    private var list: List<Wish> = listOf()
 
-    fun setData(list: List<WishEntity>) {
+    fun setData(list: List<Wish>) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -33,7 +33,7 @@ class WishesAdapter : RecyclerView.Adapter<WishesAdapter.ViewHolder>() {
         private val binding : ItemWishBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(wish: WishEntity) {
+        fun bind(wish: Wish) {
             binding.apply {
                 txt.text = wish.description
 

@@ -56,6 +56,6 @@ class NetworkModule {
     }
 
     companion object {
-        private const val BASE_URL = "https://benignsurprise.backendless.app/"
+        private const val BASE_URL = "https://benignsurprise.backendless.app/api/data/"
     }
 }

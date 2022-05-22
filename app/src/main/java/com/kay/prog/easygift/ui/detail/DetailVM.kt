@@ -1,11 +1,12 @@
 package com.kay.prog.easygift.ui.detail
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.kay.prog.easygift.data.models.UserEntity
-import com.kay.prog.easygift.data.models.WishEntity
-import com.kay.prog.easygift.domain.use_cases.GetUserInfoUseCase
-import com.kay.prog.easygift.domain.use_cases.GetWishesByNicknameUseCase
-import com.kay.prog.easygift.domain.use_cases.GetWishesUseCase
+import com.kay.prog.easygift.data.models.Wish
+import com.kay.prog.easygift.domain.use_cases.api.GetWishesByNicknameUseCase
+import com.kay.prog.easygift.domain.use_cases.api.GetUserByNicknameUseCase
+import com.kay.prog.easygift.extensions.toUserEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.kay.prog.easygift.ui.base.BaseVM
 import com.kay.prog.easygift.ui.base.LoadingEvent
@@ -13,40 +14,46 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailVM @Inject constructor(
-    private val getUserInfoUseCase: GetUserInfoUseCase,
-    private val getWishesUseCase: GetWishesUseCase,
+    private val getUserByNicknameUseCase: GetUserByNicknameUseCase,
     private val getWishesByNicknameUseCase: GetWishesByNicknameUseCase
 ): BaseVM() {
 
-    private var id: Long = 1
-    fun setId(id: Long) {
-        this.id = id
+    private var nickname: String = ""
+    fun setNickname(nickname: String?) {
+        this.nickname = nickname ?: ""
 
-        user = getUserInfoUseCase(id)
-    }
-
-    private var nickname: String = "emil01"
-    fun setNickname(nickname: String) {
-        this.nickname = nickname
-
-        //TODO problem with wish list - crashes when looking at app inspector
-//        wishList = getWishesByNicknameUseCase(nickname)
-    }
-
-    var user: LiveData<UserEntity> = getUserInfoUseCase(id)
-    var wishList: LiveData<List<WishEntity>> = getWishesByNicknameUseCase(nickname)
-
-    init {
+        getUser()
         getWishes()
     }
+
+    private val _user = MutableLiveData<UserEntity>()
+    val user: LiveData<UserEntity>
+        get() = _user
+
+    fun getUser() {
+        disposable.add(
+            getUserByNicknameUseCase("nickname='$nickname'")
+                .subscribe({
+                    _user.value = it.toUserEntity()
+                },{
+                    handleError(it)
+                })
+        )
+    }
+
+    private val _wishList = MutableLiveData<List<Wish>>()
+    val wishList: LiveData<List<Wish>>
+        get() = _wishList
 
     fun getWishes() {
         _event.value = LoadingEvent.ShowLoading
 
         disposable.add(
-            getWishesUseCase()
+            getWishesByNicknameUseCase("nickname='$nickname'")
                 .doOnTerminate { _event.value = LoadingEvent.StopLoading }
-                .subscribe({},{
+                .subscribe({
+                           _wishList.value = it
+                },{
                     handleError(it)
                 })
         )

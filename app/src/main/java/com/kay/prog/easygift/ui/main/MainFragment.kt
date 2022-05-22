@@ -8,7 +8,6 @@ import com.kay.prog.easygift.databinding.FragmentMainBinding
 import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.authorisation.AuthorisationFragment
 import com.kay.prog.easygift.ui.base.FragmentListener
-import dagger.hilt.android.AndroidEntryPoint
 
 //@AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {

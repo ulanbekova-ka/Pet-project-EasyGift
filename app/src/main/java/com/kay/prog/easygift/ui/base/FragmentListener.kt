@@ -5,5 +5,5 @@ import androidx.fragment.app.Fragment
 interface FragmentListener {
     fun openFragment(fragment: Fragment, addToBackStack: Boolean? = true) {}
 
-    fun setPrefs(objectId: String) {}
+    fun setPrefs(nickname: String) {}
 }

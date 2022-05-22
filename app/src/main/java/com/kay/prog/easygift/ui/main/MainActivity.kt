@@ -36,7 +36,6 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
             openFragment(MylistFragment(), false)
         }
 
-        // TODO not working animation
         binding.navigation.setOnItemSelectedListener {
             onOptionsItemSelected(it)
         }
@@ -60,14 +59,13 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
             R.id.nav_search -> openFragment(SearchFragment())
             R.id.nav_profile -> Toast.makeText(this, "PROFILE", Toast.LENGTH_SHORT).show()
         }
-
         return super.onOptionsItemSelected(item)
     }
 
-    override fun setPrefs(objectId: String) {
+    override fun setPrefs(nickname: String) {
         val editor = prefs.edit()
         editor.putBoolean(LOGGED_IN, true).apply()
-        editor.putString(OBJECT_ID, objectId)
+        editor.putString(KEY_NICKNAME, nickname)
 
         openFragment(MylistFragment(), false)
         binding.navigation.visibility = View.VISIBLE
@@ -75,6 +73,6 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
 
     companion object {
         private const val LOGGED_IN = "logged successfully"
-        private const val OBJECT_ID = "object id for api"
+        private const val KEY_NICKNAME = "nickname"
     }
 }
