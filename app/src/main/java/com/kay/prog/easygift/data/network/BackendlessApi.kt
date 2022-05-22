@@ -1,42 +1,43 @@
 package com.kay.prog.easygift.data.network
 
 import com.kay.prog.easygift.data.models.UserDto
-import com.kay.prog.easygift.data.models.WishDto
+import com.kay.prog.easygift.data.models.UserEntity
+import com.kay.prog.easygift.data.models.Wish
 import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.*
+
 
 interface BackendlessApi {
 
-    @GET("api/data/User")
+    @GET("User")
     fun getUsers(): Observable<List<UserDto>>
 
-//    @GET("api/data/User/{objectId}")
-//    fun getUserInfo(
-//        @Path("objectId") objectId: String
-//    ): LiveData<UserDto>
+    @GET("User")
+    fun getUserByNickname(
+        @Query("where") where: String
+    ): Single<List<UserDto>>
 
-//    @POST("api/data/User")
-//    fun saveUser(
-//        @Body user: UserDto
-//    ): Observable<Unit>
-//
-//    @PUT("api/data/User/{objectId}")
-//    fun updateUser(
-//        @Path("objectId") objectId: String,
-//        @Body user: UserDto
-//    ): Observable<Unit>
+    @POST("User")
+    fun createUser(
+        @Body user: UserEntity
+    ): Observable<Unit>
 
-    @GET("api/data/Wishes")
-    fun getWishes(): Observable<List<WishDto>>
+    @PUT("User")
+    fun updateUser(
+        @Query("where") where: String,
+        @Body user: UserEntity
+    ): Observable<Unit>
 
-//    @POST("api/data/User")
-//    fun saveWish(
-//        @Body wish: Wish
-//    ): Observable<Unit>
-//
-//    @PUT("api/data/User/{objectId}")
-//    fun updateWish(
-//        @Path("objectId") objectId: String,
-//        @Body wish: Wish
-//    ): Observable<Unit>
+
+
+    @GET("Wishes")
+    fun getWishesByNickname(
+        @Query("where") where: String
+    ): Observable<List<Wish>>
+
+    @POST("Wishes")
+    fun createWish(
+        @Body wish: Wish
+    ): Observable<Unit>
 }

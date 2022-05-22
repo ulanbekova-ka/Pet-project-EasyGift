@@ -1,4 +1,4 @@
-package com.kay.prog.easygift.ui.main
+package com.kay.prog.easygift.ui.mylist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kay.prog.easygift.R
 import com.kay.prog.easygift.data.models.UserEntity
-import com.kay.prog.easygift.databinding.ItemStarredUserBinding
+import com.kay.prog.easygift.databinding.ItemUserBinding
 import com.kay.prog.easygift.extensions.countDaysLeft
 
-class StarredUsersAdapter(
+class UsersAdapter(
     private val click: (user: UserEntity) -> Unit
-) : RecyclerView.Adapter<StarredUsersAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
     private var list: List<UserEntity> = listOf()
 
@@ -22,7 +22,7 @@ class StarredUsersAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemStarredUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding, click)
     }
 
@@ -35,7 +35,7 @@ class StarredUsersAdapter(
     }
 
     class ViewHolder(
-        private val binding : ItemStarredUserBinding,
+        private val binding : ItemUserBinding,
         private val click: (user: UserEntity) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 

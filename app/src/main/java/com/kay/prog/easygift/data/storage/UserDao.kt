@@ -2,7 +2,6 @@ package com.kay.prog.easygift.data.storage
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
@@ -16,9 +15,9 @@ interface UserDao {
     @Query("SELECT * FROM UserEntity WHERE id = :id")
     fun getUserById(id : Long): LiveData<UserEntity>
 
+    @Query("SELECT * FROM UserEntity WHERE nickname = :nickname")
+    fun getUsersByNickname(nickname: String): LiveData<List<UserEntity>>
+
     @Insert(onConflict = REPLACE)
     fun insertList(users: List<UserEntity>)
-
-    @Query("DELETE FROM UserEntity")
-    fun clearTable()
 }

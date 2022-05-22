@@ -12,15 +12,19 @@ class UserRepo @Inject constructor(
 
     fun getUsersFromApi() = userApi.getUsers()
 
-    fun getUserById(id : Long) = userDao.getUserById(id)
+    fun getUserByNickname(where: String) = userApi.getUserByNickname(where)
+
+    fun createUser(user: UserEntity) = userApi.createUser(user)
+
+    fun updateUser(where: String, user: UserEntity) = userApi.updateUser(where, user)
+
+
 
     fun saveUsersToDb(users: List<UserEntity>) {
         userDao.insertList(users)
     }
 
-    fun clearTable() {
-        userDao.clearTable()
-    }
-
     fun getUsersFromDB() = userDao.getAll()
+
+    fun getUserById(id : Long) = userDao.getUserById(id)
 }
