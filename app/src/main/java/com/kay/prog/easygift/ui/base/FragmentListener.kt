@@ -9,5 +9,5 @@ interface FragmentListener {
 
     fun deletePrefs() {}
 
-    fun getPrefs() : String { return "" }
+    fun getPrefs() : String? { return null }
 }

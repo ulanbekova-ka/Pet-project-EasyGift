@@ -27,8 +27,7 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getPreferences(MODE_PRIVATE)
-        prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE)
+        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
         if (!prefs.getBoolean(LOGGED_IN, false)) {
             openFragment(MainFragment(), false)
@@ -66,7 +65,7 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
     override fun setPrefs(nickname: String) {
         val editor = prefs.edit()
         editor.putBoolean(LOGGED_IN, true).apply()
-        editor.putString(KEY_NICKNAME, nickname)
+        editor.putString(KEY_NICKNAME, nickname).apply()
 
         openFragment(MylistFragment(), false)
         binding.navigation.visibility = View.VISIBLE
@@ -79,12 +78,13 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
         binding.navigation.visibility = View.GONE
     }
 
-    override fun getPrefs(): String {
-        return prefs.getString(KEY_NICKNAME, "") ?: ""
+    override fun getPrefs(): String? {
+        return prefs.getString(KEY_NICKNAME, "")
     }
 
     companion object {
         private const val LOGGED_IN = "logged successfully"
         private const val KEY_NICKNAME = "nickname"
+        private const val PREFS_NAME = "app preferences"
     }
 }

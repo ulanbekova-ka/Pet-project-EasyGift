@@ -44,7 +44,7 @@ class CreateWishFragment: BaseFragment<CreateWishVM, FragmentCreateWishBinding>(
     private fun setupViews() {
         with(binding) {
             saveBtn.setOnClickListener {
-                vm.saveWish(description.text.toString(), url.text.toString(), price.text.toString().toDoubleOrNull())
+                vm.saveWish(description.text.toString(), url.text.toString(), price.text.toString().toIntOrNull())
             }
         }
     }

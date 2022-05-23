@@ -34,11 +34,14 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
         } catch (e: Exception) { print("Activity must implement FragmentListener")}
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         vm.setNickname(fragmentListener.getPrefs())
-        showToast(fragmentListener.getPrefs())
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupViews()
         subscribeToLiveData()
@@ -57,6 +60,10 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
 
             changeBtn.setOnClickListener {
                 showToast("Изменить профиль")
+            }
+
+            settingsBtn.setOnClickListener {
+                showToast("Перейти в настройки")
             }
 
             logOutBtn.setOnClickListener {

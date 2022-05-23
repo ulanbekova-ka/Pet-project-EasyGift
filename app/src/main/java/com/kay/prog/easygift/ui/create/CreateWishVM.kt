@@ -17,7 +17,7 @@ class CreateWishVM @Inject constructor(
         this.nickname = nickname ?: ""
     }
 
-    fun saveWish(description: String?, url: String?, price: Double?) {
+    fun saveWish(description: String?, url: String?, price: Int?) {
         if (description.isNullOrEmpty()) {
             _event.value = RegEvent.OnEmptyFields
             return

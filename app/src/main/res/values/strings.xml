@@ -7,7 +7,7 @@
     <string name="finished_loading">LOADING STOPPED</string>
 
     <string name="full_name">%s %s</string>
-    <string name="price">%f сом</string>
+    <string name="price">%d сом</string>
     <string name="left">осталось %d дней</string>
 
     <string name="home">дом</string>
@@ -22,7 +22,8 @@
     <string name="greeting">Добро пожаловать!</string>
     <string name="auth_btn">Войти в профиль</string>
     <string name="reg_btn">Зарегистрироваться</string>
-    <string name="un_subscribe">Подписаться/Отписаться</string>
+    <string name="subscribe">Подписаться</string>
+    <string name="unsubscribe">Отписаться</string>
 
     <string name="hint_nickname">Введите новый ник</string>
     <string name="hint_password">Введите пароль</string>
@@ -34,5 +35,5 @@
     <string name="hint_wish_description">Введите свое пожелание со всеми подробностями</string>
     <string name="hint_wish_url">Вставьте ссылку (опционально)</string>
     <string name="hint_wish_price">Введите стоимость в сомах (опционально)</string>
-    <string name="btn_change_user">Изменить профиль</string>
+    <string name="btn_change_user">Редактировать</string>
 </resources>
