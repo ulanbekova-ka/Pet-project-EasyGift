@@ -1,5 +1,6 @@
 package com.kay.prog.easygift.data.repo
 
+import com.kay.prog.easygift.data.models.Relation
 import com.kay.prog.easygift.data.models.UserDto
 import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.data.network.BackendlessApi
@@ -17,6 +18,8 @@ class UserRepo @Inject constructor(
     fun updateUser(where: String, user: UserDto) = userApi.updateUser(where, user)
 
     fun getFollowedList(where: String) = userApi.getListOfFollowed(where)
+
+    fun follow(relation: Relation) = userApi.follow(relation)
 
     fun saveUserToDb(user: UserEntity) = userDao.insertUser(user)
 

@@ -7,7 +7,6 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.kay.prog.easygift.R
 import com.kay.prog.easygift.databinding.FragmentDetailBinding
-import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.base.BaseFragment
 import com.kay.prog.easygift.ui.base.FragmentListener
 import com.kay.prog.easygift.ui.base.LoadingEvent
@@ -55,8 +54,7 @@ class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
             }
 
             subscribeBtn.setOnClickListener {
-                // TODO
-                showToast("Подписка прошла успешно")
+                vm.follow()
             }
         }
     }

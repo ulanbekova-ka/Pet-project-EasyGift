@@ -20,7 +20,7 @@ class CreateWishVM @Inject constructor(
     val user: LiveData<UserEntity>
         get() = _user
 
-    fun saveWish(description: String, url: String?, price: Int?) {
+    fun saveWish(description: String, url: String?, price: String?) {
         disposable.add(
             createWishUseCase(
                 Wish(_user.value!!.nickname, description, url, price)

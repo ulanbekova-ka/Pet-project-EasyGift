@@ -38,7 +38,7 @@ class CreateWishFragment: BaseFragment<CreateWishVM, FragmentCreateWishBinding>(
         with(binding) {
             saveBtn.setOnClickListener {
                 checkInput(
-                    descriptionTxt.text.toString(), urlTxt.text.toString(), priceTxt.text.toString().toIntOrNull()
+                    descriptionTxt.text.toString(), urlTxt.text.toString(), priceTxt.text.toString()
                 )
             }
         }
@@ -55,7 +55,7 @@ class CreateWishFragment: BaseFragment<CreateWishVM, FragmentCreateWishBinding>(
         }
     }
 
-    private fun checkInput(descriptionTxt: String?, urlTxt: String?, priceTxt: Int?) {
+    private fun checkInput(descriptionTxt: String?, urlTxt: String?, priceTxt: String?) {
         binding.apply {
             when {
                 descriptionTxt.isNullOrEmpty() -> {

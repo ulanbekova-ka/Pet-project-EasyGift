@@ -2,8 +2,10 @@ package com.kay.prog.easygift.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.kay.prog.easygift.data.models.Relation
 import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.data.models.Wish
+import com.kay.prog.easygift.domain.use_cases.api.FollowUseCase
 import com.kay.prog.easygift.domain.use_cases.api.GetWishesByNicknameUseCase
 import com.kay.prog.easygift.domain.use_cases.db.GetUserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailVM @Inject constructor(
     private val getUserInfoUseCase: GetUserInfoUseCase,
-    private val getWishesByNicknameUseCase: GetWishesByNicknameUseCase
+    private val getWishesByNicknameUseCase: GetWishesByNicknameUseCase,
+    private val followUseCase: FollowUseCase
 ): BaseVM() {
 
     fun setId(id: Long) {
@@ -44,4 +47,19 @@ class DetailVM @Inject constructor(
                 })
         )
     }
+
+    private val logged: LiveData<UserEntity> = getUserInfoUseCase(1L)
+
+    fun follow() {
+        disposable.add(
+            followUseCase(
+                Relation(logged.value!!.nickname, _user.value!!.nickname)
+            )
+                .subscribe({}, {
+                    handleError(it)
+                })
+        )
+    }
+
+
 }

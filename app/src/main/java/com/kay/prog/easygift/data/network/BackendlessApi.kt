@@ -29,6 +29,11 @@ interface BackendlessApi {
         @Query("where") where: String
     ): Single<List<Relation>>
 
+    @POST("Relations")
+    fun follow(
+        @Body relation: Relation
+    ): Observable<Unit>
+
     @GET("Wishes")
     fun getWishesByNickname(
         @Query("where") where: String
