@@ -21,10 +21,13 @@ class UserRepo @Inject constructor(
 
 
 
-    fun saveUserToDb(user: UserEntity) = userDao.insert(user)
+    fun saveUserToDb(user: UserEntity) = userDao.insertUser(user)
+
 //    fun saveUsersToDb(users: List<UserEntity>) = userDao.insertList(users)
 
     fun getUsersFromDB() = userDao.getAll()
 
     fun getUserById(id : Long) = userDao.getUserById(id)
+
+    fun deleteUsersFromDb() = userDao.deleteAll()
 }

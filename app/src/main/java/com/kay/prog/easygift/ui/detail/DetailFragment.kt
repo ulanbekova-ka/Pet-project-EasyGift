@@ -56,6 +56,7 @@ class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
             }
 
             subscribeBtn.setOnClickListener {
+                // TODO
                 showToast("Подписка прошла успешно")
             }
         }
@@ -85,6 +86,7 @@ class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
         }
     }
 
+    // TODO Delete - get by id
     companion object {
         private const val KEY_NICK = "nick"
 

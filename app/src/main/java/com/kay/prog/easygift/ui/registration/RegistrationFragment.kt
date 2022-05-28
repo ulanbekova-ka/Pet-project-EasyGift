@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import com.kay.prog.easygift.R
 import com.kay.prog.easygift.databinding.FragmentRegistrationBinding
-import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.base.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,14 +35,12 @@ class RegistrationFragment: BaseFragment<RegistrationVM, FragmentRegistrationBin
     private fun setupViews() {
         with(binding) {
             regBtn.setOnClickListener {
-                vm.saveUser(
-                    name.text.toString(),
-                    surname.text.toString(),
-                    nickname.text.toString(),
-                    email.text.toString(),
-                    birthday.text.toString(),
-                    password.text.toString()
-                )
+                checkInput(nameTxt.text.toString(),
+                    surnameTxt.text.toString(),
+                    nicknameTxt.text.toString(),
+                    emailTxt.text.toString(),
+                    birthdayTxt.text.toString(),
+                    passwordTxt.text.toString())
             }
         }
     }
@@ -51,13 +48,45 @@ class RegistrationFragment: BaseFragment<RegistrationVM, FragmentRegistrationBin
     private fun subscribeToLiveData() {
         vm.event.observe(viewLifecycleOwner) {
             when (it) {
-                is RegEvent.OnEmptyFields -> showToast("Заполните все поля")
-                is RegEvent.OnIncorrectPassword -> showToast("Пароль должен состоять из более чем 8 знаков, заглавной и прописной букв, чисел")
-                is RegEvent.OnIncorrectBirthdayFormat -> showToast("Формат даты - дд/мм/гггг (используйте '/')")
-                is RegEvent.OnTakenNickname -> showToast("Пользователь с таким ником существует. Введите другой")
-                is RegEvent.OnRegSuccess -> fragmentListener.setPrefs(binding.nickname.text.toString())
+                is RegEvent.OnTakenNickname -> binding.nickname.error = getString(R.string.taken_nickname_error)
+                is RegEvent.OnSuccess -> fragmentListener.setPrefs(binding.nicknameTxt.text.toString())
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))
             }
         }
     }
+
+    private fun checkInput(nameTxt: String?, surnameTxt: String?, nicknameTxt: String?, emailTxt: String?, birthdayTxt: String?, passwordTxt: String?) {
+        binding.apply {
+            when {
+                nameTxt.isNullOrEmpty() -> {
+                    name.error = getString(R.string.empty_error)
+                }
+                surnameTxt.isNullOrEmpty() -> {
+                    surname.error = getString(R.string.empty_error)
+                }
+                nicknameTxt.isNullOrEmpty() -> {
+                    nickname.error = getString(R.string.empty_error)
+                }
+                emailTxt.isNullOrEmpty() -> {
+                    email.error = getString(R.string.empty_error)
+                }
+                birthdayTxt.isNullOrEmpty() -> {
+                    birthday.error = getString(R.string.empty_error)
+                }
+                passwordTxt.isNullOrEmpty() -> {
+                    password.error = getString(R.string.empty_error)
+                }
+                !passwordTxt.matches(Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}\$")) -> {
+                    password.error = getString(R.string.password_format_mismatch)
+                }
+                !birthdayTxt.matches(Regex("(^(((0[1-9]|1[0-9]|2[0-8])[/](0[1-9]|1[012]))|((29|30|31)[/](0[13578]|1[02]))|((29|30)[/](0[4,6,9]|11)))[/](19|[2-9][0-9])\\d\\d\$)|(^29[/]02[/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)\$)")) -> {
+                    birthday.error = getString(R.string.birthday_format_mismatch)
+                }
+                else -> {
+                    vm.saveUser(nameTxt, surnameTxt, nicknameTxt, emailTxt, birthdayTxt, passwordTxt)
+                }
+            }
+        }
+    }
+
 }

@@ -12,21 +12,20 @@ class CreateWishVM @Inject constructor(
     private val createWishUseCase: CreateWishUseCase
 ): BaseVM() {
 
+    //TODO - take by id
     private var nickname: String = ""
     fun setNickname(nickname: String?) {
         this.nickname = nickname ?: ""
     }
 
-    fun saveWish(description: String?, url: String?, price: Int?) {
-        if (description.isNullOrEmpty()) {
-            _event.value = RegEvent.OnEmptyFields
-            return
-        }
-
+    //TODO not working
+    fun saveWish(description: String, url: String?, price: Int?) {
         disposable.add(
-            createWishUseCase( Wish(nickname, description, url, price) )
+            createWishUseCase(
+                Wish(nickname, description, url, price)
+            )
                 .subscribe({
-                    _event.value = RegEvent.OnRegSuccess
+                    _event.value = RegEvent.OnSuccess
                 }, {
                     handleError(it)
                 })

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/prof_avatar"
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -14,12 +14,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/nickname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_500"
         android:textSize="16sp"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,35 +28,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/prof_avatar" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fullName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_500"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/nickname"
         app:layout_constraintBottom_toTopOf="@id/birthday"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/prof_avatar" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/birthday"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
+        android:textColor="@color/purple_500"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/fullName"
         app:layout_constraintBottom_toTopOf="@id/subscribe_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/prof_avatar" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/subscribe_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:backgroundTint="@color/purple_500"
         android:textSize="12sp"
         android:text="@string/subscribe"
         app:layout_constraintTop_toBottomOf="@id/birthday"

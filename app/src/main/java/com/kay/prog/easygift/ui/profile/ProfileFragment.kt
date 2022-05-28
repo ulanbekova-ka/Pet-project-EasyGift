@@ -59,6 +59,7 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
             }
 
             changeBtn.setOnClickListener {
+                // TODO
                 showToast("Изменить профиль")
             }
 
@@ -69,6 +70,7 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
             logOutBtn.setOnClickListener {
                 fragmentListener.openFragment(MainFragment(), false)
                 fragmentListener.deletePrefs()
+                vm.deleteUsers()
             }
         }
     }
@@ -89,7 +91,7 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
 
         vm.event.observe(viewLifecycleOwner) {
             when (it) {
-                is AuthEvent.OnAuthError -> showToast("Can't find user")
+                is AuthEvent.OnUserNotFound -> showToast("Can't find user")
                 is LoadingEvent.ShowLoading -> binding.swipeRefresh.isRefreshing = true
                 is LoadingEvent.StopLoading -> binding.swipeRefresh.isRefreshing = false
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))

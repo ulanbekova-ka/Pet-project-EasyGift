@@ -13,8 +13,8 @@ import com.kay.prog.easygift.ui.detail.DetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MylistFragment: BaseFragment<MylistVM, FragmentMylistBinding>(
-    MylistVM::class.java,
+class MyListFragment: BaseFragment<MyListVM, FragmentMylistBinding>(
+    MyListVM::class.java,
     {
         FragmentMylistBinding.inflate(it)
     }

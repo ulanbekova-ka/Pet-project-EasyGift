@@ -2,7 +2,6 @@ package com.kay.prog.easygift.ui.main
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.kay.prog.easygift.R
@@ -13,12 +12,12 @@ import com.kay.prog.easygift.ui.base.FragmentListener
 import com.kay.prog.easygift.ui.create.CreateWishFragment
 import com.kay.prog.easygift.ui.profile.ProfileFragment
 import com.kay.prog.easygift.ui.search.SearchFragment
-import com.kay.prog.easygift.ui.mylist.MylistFragment
-import com.kay.prog.easygift.ui.mylist.MylistVM
+import com.kay.prog.easygift.ui.mylist.MyListFragment
+import com.kay.prog.easygift.ui.mylist.MyListVM
 
 @AndroidEntryPoint
-class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>(
-    MylistVM::class.java,
+class MainActivity: FragmentListener, BaseActivity<MyListVM,ActivityMainBinding>(
+    MyListVM::class.java,
     { ActivityMainBinding.inflate(it)}
 ) {
 
@@ -33,11 +32,33 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
             openFragment(MainFragment(), false)
             binding.navigation.visibility = View.GONE
         } else {
-            openFragment(MylistFragment(), false)
+            openFragment(MyListFragment(), false)
         }
 
-        binding.navigation.setOnItemSelectedListener {
-            onOptionsItemSelected(it)
+        setNavigationView()
+    }
+
+    private fun setNavigationView() {
+        binding.navigation.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.nav_home -> {
+                    openFragment(MyListFragment(), false)
+                    true
+                }
+                R.id.nav_create -> {
+                    openFragment(CreateWishFragment(), false)
+                    true
+                }
+                R.id.nav_search -> {
+                    openFragment(SearchFragment(), false)
+                    true
+                }
+                R.id.nav_profile -> {
+                    openFragment(ProfileFragment(), false)
+                    true
+                }
+                else -> false
+            }
         }
     }
 
@@ -52,22 +73,23 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
             .commit()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.nav_home -> openFragment(MylistFragment(), false)
-            R.id.nav_create -> openFragment(CreateWishFragment(), false)
-            R.id.nav_search -> openFragment(SearchFragment(), false)
-            R.id.nav_profile -> openFragment(ProfileFragment(), false)
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId) {
+//            R.id.nav_home -> openFragment(MylistFragment(), false)
+//            R.id.nav_create -> openFragment(CreateWishFragment(), false)
+//            R.id.nav_search -> openFragment(SearchFragment(), false)
+//            R.id.nav_profile -> openFragment(ProfileFragment(), false)
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     override fun setPrefs(nickname: String) {
         val editor = prefs.edit()
         editor.putBoolean(LOGGED_IN, true).apply()
+        //TODO delete saving nickname
         editor.putString(KEY_NICKNAME, nickname).apply()
 
-        openFragment(MylistFragment(), false)
+        openFragment(MyListFragment(), false)
         binding.navigation.visibility = View.VISIBLE
     }
 
@@ -78,6 +100,7 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
         binding.navigation.visibility = View.GONE
     }
 
+    //TODO delete fun
     override fun getPrefs(): String? {
         return prefs.getString(KEY_NICKNAME, "")
     }

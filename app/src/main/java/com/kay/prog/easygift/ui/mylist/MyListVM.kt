@@ -13,12 +13,13 @@ import com.kay.prog.easygift.ui.base.LoadingEvent
 import javax.inject.Inject
 
 @HiltViewModel
-class MylistVM @Inject constructor(
+class MyListVM @Inject constructor(
     private val getUserByNicknameUseCase: GetUserByNicknameUseCase,
     private val getUsersFromDbUseCase : GetUsersFromDbUseCase,
     private val getFollowedUsersUseCase: GetFollowedUsersUseCase
 ): BaseVM() {
 
+    // TODO - get the first one in Id
     private var nickname: String = ""
     fun setNickname(nickname: String?) {
         this.nickname = nickname ?: ""
@@ -30,6 +31,7 @@ class MylistVM @Inject constructor(
     val user: LiveData<UserDto>
         get() = _user
 
+    // TODO - get from db list - delete the first one
     val users: LiveData<List<UserEntity>> = getUsersFromDbUseCase()
 
     fun downloadUsers() {

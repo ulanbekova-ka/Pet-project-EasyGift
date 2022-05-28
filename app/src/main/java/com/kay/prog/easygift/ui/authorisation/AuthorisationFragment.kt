@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import com.kay.prog.easygift.R
 import com.kay.prog.easygift.databinding.FragmentAuthorisationBinding
-import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.base.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +36,7 @@ class AuthorisationFragment: BaseFragment<AuthorisationVM, FragmentAuthorisation
     private fun setupViews() {
         with(binding) {
             autoBtn.setOnClickListener {
-                vm.checkInput(nickname.text.toString(), password.text.toString())
+                checkInput(nicknameTxt.text.toString(), passwordTxt.text.toString())
             }
         }
     }
@@ -45,10 +44,26 @@ class AuthorisationFragment: BaseFragment<AuthorisationVM, FragmentAuthorisation
     private fun subscribeToLiveData() {
         vm.event.observe(viewLifecycleOwner) {
             when (it) {
-                is BaseEvent.ShowToast -> showToast(it.message)
-                is AuthEvent.OnAuthError -> showToast("Wrong nickname or password")
-                is AuthEvent.OnAuthSuccess -> fragmentListener.setPrefs(binding.nickname.text.toString())
+                is AuthEvent.OnUserNotFound -> binding.nickname.error = getString(R.string.wrong_nickname)
+                is AuthEvent.OnWrongPassword -> binding.password.error = getString(R.string.wrong_password)
+                is AuthEvent.OnSuccess -> fragmentListener.setPrefs(binding.nicknameTxt.text.toString())
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))
+            }
+        }
+    }
+
+    private fun checkInput(nicknameTxt: String?, passwordTxt: String?) {
+        binding.apply {
+            when {
+                nicknameTxt.isNullOrEmpty() -> {
+                    nickname.error = getString(R.string.empty_error)
+                }
+                passwordTxt.isNullOrEmpty() -> {
+                    password.error = getString(R.string.empty_error)
+                }
+                else -> {
+                    vm.findUser(nicknameTxt, passwordTxt)
+                }
             }
         }
     }

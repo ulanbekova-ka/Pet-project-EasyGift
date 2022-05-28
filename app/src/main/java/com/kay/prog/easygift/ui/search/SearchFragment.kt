@@ -49,7 +49,7 @@ class SearchFragment: BaseFragment<SearchVM, FragmentSearchBinding>(
             recycler.adapter = usersAdapter
 
             searchBtn.setOnClickListener {
-                vm.findUser(searchInput.text.toString())
+                vm.findUser(searchTxt.text.toString())
             }
         }
     }

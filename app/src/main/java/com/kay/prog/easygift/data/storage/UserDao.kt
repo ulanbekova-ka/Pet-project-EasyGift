@@ -18,6 +18,9 @@ interface UserDao {
 //    @Insert(onConflict = REPLACE)
 //    fun insertList(users: List<UserEntity>)
 
-    @Insert
-    fun insert(user: UserEntity)
+    @Query("DELETE FROM UserEntity")
+    fun deleteAll()
+
+    @Insert(onConflict = REPLACE)
+    fun insertUser(user: UserEntity)
 }

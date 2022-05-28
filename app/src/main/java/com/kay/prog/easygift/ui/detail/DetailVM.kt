@@ -19,6 +19,7 @@ class DetailVM @Inject constructor(
     private val getWishesByNicknameUseCase: GetWishesByNicknameUseCase
 ): BaseVM() {
 
+    // TODO delete - get by id
     private var nickname: String = ""
     fun setNickname(nickname: String?) {
         this.nickname = nickname ?: ""
@@ -31,6 +32,7 @@ class DetailVM @Inject constructor(
     val user: LiveData<UserEntity>
         get() = _user
 
+    // TODO GetById! From Db
     fun getUser() {
         disposable.add(
             getUserByNicknameUseCase("nickname='$nickname'")
@@ -38,7 +40,7 @@ class DetailVM @Inject constructor(
                     if (it.size == 1) {
                         _user.value = it[0].toUserEntity()
                     } else {
-                        _event.value = AuthEvent.OnAuthError
+                        _event.value = AuthEvent.OnUserNotFound
                     }
                 },{
                     handleError(it)
