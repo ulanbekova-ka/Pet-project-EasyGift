@@ -44,8 +44,8 @@ class AuthorisationFragment: BaseFragment<AuthorisationVM, FragmentAuthorisation
     private fun subscribeToLiveData() {
         vm.event.observe(viewLifecycleOwner) {
             when (it) {
-                is AuthEvent.OnUserNotFound -> binding.nickname.error = getString(R.string.wrong_nickname)
-                is AuthEvent.OnWrongPassword -> binding.password.error = getString(R.string.wrong_password)
+                is AuthEvent.OnUserNotFound -> binding.nickname.hint = getString(R.string.wrong_nickname)
+                is AuthEvent.OnWrongPassword -> binding.password.hint = getString(R.string.wrong_password)
                 is AuthEvent.OnSuccess -> fragmentListener.setPrefs(binding.nicknameTxt.text.toString())
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))
             }
@@ -56,10 +56,10 @@ class AuthorisationFragment: BaseFragment<AuthorisationVM, FragmentAuthorisation
         binding.apply {
             when {
                 nicknameTxt.isNullOrEmpty() -> {
-                    nickname.error = getString(R.string.empty_error)
+                    nickname.hint = getString(R.string.empty_error)
                 }
                 passwordTxt.isNullOrEmpty() -> {
-                    password.error = getString(R.string.empty_error)
+                    password.hint = getString(R.string.empty_error)
                 }
                 else -> {
                     vm.findUser(nicknameTxt, passwordTxt)

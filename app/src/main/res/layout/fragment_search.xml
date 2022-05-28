@@ -8,11 +8,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/search_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:endIconMode="clear_text"
-        app:boxBackgroundColor="@color/purple_200"
+        style="@style/MyTextInputLayoutStyle"
         android:hint="@string/search_hint"
         app:layout_constraintBottom_toTopOf="@id/swipe_refresh"
         app:layout_constraintEnd_toStartOf="@id/search_btn"
@@ -21,21 +17,13 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:maxLines="1" />
+            style="@style/MyEditTextStyle"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/search_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/find"
-        android:backgroundTint="@color/purple_500"
-        android:textSize="16sp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginVertical="16dp"
+        style="@style/MyButtonStyle"
         app:layout_constraintBottom_toBottomOf="@id/search_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/search_input"

@@ -6,14 +6,9 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/greeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/purple_700"
-        android:textStyle="italic"
-        android:textSize="22sp"
-        android:layout_margin="16dp"
+        style="@style/MyTextViewStyle"
+        android:textSize="24sp"
         android:text="@string/greeting"
-        android:gravity="center"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_auth"
@@ -22,11 +17,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_auth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_500"
-        android:textSize="16sp"
-        android:layout_margin="16dp"
+        style="@style/MyButtonStyle"
         android:text="@string/auth_btn"
         app:layout_constraintTop_toBottomOf="@id/greeting"
         app:layout_constraintBottom_toTopOf="@id/btn_reg"
@@ -35,11 +26,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_reg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_500"
-        android:textSize="16sp"
-        android:layout_margin="16dp"
+        style="@style/MyButtonStyle"
         android:text="@string/reg_btn"
         app:layout_constraintTop_toBottomOf="@id/btn_auth"
         app:layout_constraintBottom_toBottomOf="parent"

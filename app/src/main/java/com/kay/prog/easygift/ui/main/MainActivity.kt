@@ -73,16 +73,6 @@ class MainActivity: FragmentListener, BaseActivity<MyListVM,ActivityMainBinding>
             .commit()
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId) {
-//            R.id.nav_home -> openFragment(MylistFragment(), false)
-//            R.id.nav_create -> openFragment(CreateWishFragment(), false)
-//            R.id.nav_search -> openFragment(SearchFragment(), false)
-//            R.id.nav_profile -> openFragment(ProfileFragment(), false)
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
-
     override fun setPrefs(nickname: String) {
         val editor = prefs.edit()
         editor.putBoolean(LOGGED_IN, true).apply()

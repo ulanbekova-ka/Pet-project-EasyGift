@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingHorizontal="10dp"
+    android:paddingBottom="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/description"
-        android:layout_width="match_parent"
+        style="@style/MyTextInputLayoutStyle"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
-        app:boxBackgroundColor="@color/purple_200"
         android:hint="@string/hint_wish_description"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,19 +20,14 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description_txt"
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textMultiLine"
-            android:textSize="16sp"/>
+            style="@style/MyEditTextStyle"
+            android:inputType="textMultiLine"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/url"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        app:boxBackgroundColor="@color/purple_200"
+        style="@style/MyTextInputLayoutStyle"
         android:hint="@string/hint_wish_url"
         app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintBottom_toTopOf="@id/price"
@@ -40,19 +36,12 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/url_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:maxLines="1" />
+            style="@style/MyEditTextStyle"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        app:boxBackgroundColor="@color/purple_200"
+        style="@style/MyTextInputLayoutStyle"
         android:hint="@string/hint_wish_price"
         app:layout_constraintTop_toBottomOf="@id/url"
         app:layout_constraintBottom_toTopOf="@id/save_btn"
@@ -61,20 +50,13 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/price_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:textSize="16sp"
-            android:maxLines="1" />
+            style="@style/MyEditTextStyle"
+            android:inputType="numberDecimal"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:backgroundTint="@color/purple_500"
-        android:layout_marginBottom="80dp"
+        style="@style/MyButtonStyle"
         android:text="@string/btn_continue"
         app:layout_constraintTop_toBottomOf="@id/price"
         app:layout_constraintBottom_toBottomOf="parent"

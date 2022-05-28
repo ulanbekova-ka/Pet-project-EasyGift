@@ -6,11 +6,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:endIconMode="clear_text"
-        app:boxBackgroundColor="@color/purple_200"
+        style="@style/MyTextInputLayoutStyle"
         android:hint="@string/hint_first_name"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,20 +16,13 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:textSize="16sp"
-            android:maxLines="1" />
+            style="@style/MyEditTextStyle"
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/surname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:endIconMode="clear_text"
-        app:boxBackgroundColor="@color/purple_200"
+        style="@style/MyTextInputLayoutStyle"
         android:hint="@string/hint_surname"
         app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintBottom_toTopOf="@id/nickname"
@@ -42,20 +31,12 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/surname_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:textSize="16sp"
-            android:maxLines="1" />
+            style="@style/MyEditTextStyle" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nickname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:endIconMode="clear_text"
-        app:boxBackgroundColor="@color/purple_200"
+        style="@style/MyTextInputLayoutStyle"
         android:hint="@string/hint_nickname"
         app:layout_constraintTop_toBottomOf="@id/surname"
         app:layout_constraintBottom_toTopOf="@id/email"
@@ -64,19 +45,12 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nickname_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:maxLines="1" />
+            style="@style/MyEditTextStyle" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:endIconMode="clear_text"
-        app:boxBackgroundColor="@color/purple_200"
+        style="@style/MyTextInputLayoutStyle"
         android:hint="@string/hint_email"
         app:layout_constraintTop_toBottomOf="@id/nickname"
         app:layout_constraintBottom_toTopOf="@id/birthday"
@@ -85,20 +59,12 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textSize="16sp"
-            android:maxLines="1" />
+            style="@style/MyEditTextStyle" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/birthday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:endIconMode="clear_text"
-        app:boxBackgroundColor="@color/purple_200"
+        style="@style/MyTextInputLayoutStyle"
         android:hint="@string/hint_birthday"
         app:layout_constraintTop_toBottomOf="@id/email"
         app:layout_constraintBottom_toTopOf="@id/password"
@@ -107,20 +73,14 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/birthday_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:textSize="16sp"
-            android:maxLines="1" />
+            style="@style/MyEditTextStyle"
+            android:inputType="date"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        style="@style/MyTextInputLayoutStyle"
         app:endIconMode="password_toggle"
-        app:boxBackgroundColor="@color/purple_200"
         android:hint="@string/hint_password"
         app:layout_constraintTop_toBottomOf="@id/birthday"
         app:layout_constraintBottom_toTopOf="@id/reg_btn"
@@ -129,20 +89,13 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:inputType="textWebPassword"
-            android:maxLines="1" />
+            style="@style/MyEditTextStyle"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/reg_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_500"
-        android:textSize="16sp"
-        android:layout_margin="16dp"
+        style="@style/MyButtonStyle"
         android:text="@string/btn_continue"
         app:layout_constraintTop_toBottomOf="@id/password"
         app:layout_constraintBottom_toBottomOf="parent"
