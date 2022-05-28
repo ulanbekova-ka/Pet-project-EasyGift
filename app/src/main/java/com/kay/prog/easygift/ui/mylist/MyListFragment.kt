@@ -30,12 +30,6 @@ class MyListFragment: BaseFragment<MyListVM, FragmentMylistBinding>(
         } catch (e: Exception) { print("Activity must implement FragmentListener")}
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.setNickname(fragmentListener.getPrefs())
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -46,7 +40,7 @@ class MyListFragment: BaseFragment<MyListVM, FragmentMylistBinding>(
     private fun setupViews() {
         with(binding) {
             usersAdapter = UsersAdapter {
-                fragmentListener.openFragment(DetailFragment.newInstance(it.nickname))
+                fragmentListener.openFragment(DetailFragment.newInstance(it.id ?: 1L))
             }
 
             recycler.adapter = usersAdapter
@@ -59,6 +53,9 @@ class MyListFragment: BaseFragment<MyListVM, FragmentMylistBinding>(
 
     private fun subscribeToLiveData() {
         vm.users.observe(viewLifecycleOwner) {
+            if (it.size >= 1) {
+                it.removeAt(0)
+            }
             usersAdapter.setData(it)
         }
 

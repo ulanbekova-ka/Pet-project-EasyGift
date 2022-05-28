@@ -9,7 +9,7 @@ class GetUsersFromDbUseCase @Inject constructor(
     private val userRepo: UserRepo
 ) {
 
-    operator fun invoke(): LiveData<List<UserEntity>> {
+    operator fun invoke(): LiveData<MutableList<UserEntity>> {
         return userRepo.getUsersFromDB()
     }
 }

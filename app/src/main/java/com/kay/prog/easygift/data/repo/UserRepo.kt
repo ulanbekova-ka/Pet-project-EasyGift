@@ -10,9 +10,6 @@ class UserRepo @Inject constructor(
     private var userDao: UserDao,
     private var userApi: BackendlessApi
 ) {
-
-//    fun getUsersFromApi() = userApi.getUsers()
-
     fun getUserByNickname(where: String) = userApi.getUserByNickname(where)
 
     fun createUser(user: UserDto) = userApi.createUser(user)
@@ -22,8 +19,6 @@ class UserRepo @Inject constructor(
 
 
     fun saveUserToDb(user: UserEntity) = userDao.insertUser(user)
-
-//    fun saveUsersToDb(users: List<UserEntity>) = userDao.insertList(users)
 
     fun getUsersFromDB() = userDao.getAll()
 

@@ -76,8 +76,6 @@ class MainActivity: FragmentListener, BaseActivity<MyListVM,ActivityMainBinding>
     override fun setPrefs(nickname: String) {
         val editor = prefs.edit()
         editor.putBoolean(LOGGED_IN, true).apply()
-        //TODO delete saving nickname
-        editor.putString(KEY_NICKNAME, nickname).apply()
 
         openFragment(MyListFragment(), false)
         binding.navigation.visibility = View.VISIBLE
@@ -88,11 +86,6 @@ class MainActivity: FragmentListener, BaseActivity<MyListVM,ActivityMainBinding>
         editor.putBoolean(LOGGED_IN, false).apply()
 
         binding.navigation.visibility = View.GONE
-    }
-
-    //TODO delete fun
-    override fun getPrefs(): String? {
-        return prefs.getString(KEY_NICKNAME, "")
     }
 
     companion object {

@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.kay.prog.easygift.R
 import com.kay.prog.easygift.databinding.FragmentProfileBinding
 import com.kay.prog.easygift.extensions.showToast
-import com.kay.prog.easygift.ui.base.AuthEvent
 import com.kay.prog.easygift.ui.base.BaseFragment
 import com.kay.prog.easygift.ui.base.FragmentListener
 import com.kay.prog.easygift.ui.base.LoadingEvent
@@ -34,12 +33,6 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
         } catch (e: Exception) { print("Activity must implement FragmentListener")}
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.setNickname(fragmentListener.getPrefs())
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,11 +48,9 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
 
             swipeRefresh.setOnRefreshListener {
                 vm.getWishes()
-                vm.getUser()
             }
 
             changeBtn.setOnClickListener {
-                // TODO
                 showToast("Изменить профиль")
             }
 
@@ -91,7 +82,6 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
 
         vm.event.observe(viewLifecycleOwner) {
             when (it) {
-                is AuthEvent.OnUserNotFound -> showToast("Can't find user")
                 is LoadingEvent.ShowLoading -> binding.swipeRefresh.isRefreshing = true
                 is LoadingEvent.StopLoading -> binding.swipeRefresh.isRefreshing = false
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))

@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.data.models.Wish
 import com.kay.prog.easygift.domain.use_cases.api.GetWishesByNicknameUseCase
-import com.kay.prog.easygift.domain.use_cases.api.GetUserByNicknameUseCase
-import com.kay.prog.easygift.extensions.toUserEntity
-import com.kay.prog.easygift.ui.base.AuthEvent
+import com.kay.prog.easygift.domain.use_cases.db.GetUserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.kay.prog.easygift.ui.base.BaseVM
 import com.kay.prog.easygift.ui.base.LoadingEvent
@@ -15,38 +13,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailVM @Inject constructor(
-    private val getUserByNicknameUseCase: GetUserByNicknameUseCase,
+    private val getUserInfoUseCase: GetUserInfoUseCase,
     private val getWishesByNicknameUseCase: GetWishesByNicknameUseCase
 ): BaseVM() {
 
-    // TODO delete - get by id
-    private var nickname: String = ""
-    fun setNickname(nickname: String?) {
-        this.nickname = nickname ?: ""
+    fun setId(id: Long) {
+        _user = getUserInfoUseCase(id) as MutableLiveData<UserEntity>
 
-        getUser()
         getWishes()
     }
 
-    private val _user = MutableLiveData<UserEntity>()
+    private var _user = MutableLiveData<UserEntity>()
     val user: LiveData<UserEntity>
         get() = _user
-
-    // TODO GetById! From Db
-    fun getUser() {
-        disposable.add(
-            getUserByNicknameUseCase("nickname='$nickname'")
-                .subscribe({
-                    if (it.size == 1) {
-                        _user.value = it[0].toUserEntity()
-                    } else {
-                        _event.value = AuthEvent.OnUserNotFound
-                    }
-                },{
-                    handleError(it)
-                })
-        )
-    }
 
     private val _wishList = MutableLiveData<List<Wish>>()
     val wishList: LiveData<List<Wish>>
@@ -56,7 +35,7 @@ class DetailVM @Inject constructor(
         _event.value = LoadingEvent.ShowLoading
 
         disposable.add(
-            getWishesByNicknameUseCase("nickname='$nickname'")
+            getWishesByNicknameUseCase("nickname='${_user.value!!.nickname}'")
                 .doOnTerminate { _event.value = LoadingEvent.StopLoading }
                 .subscribe({
                            _wishList.value = it

@@ -7,10 +7,6 @@ import io.reactivex.Single
 import retrofit2.http.*
 
 interface BackendlessApi {
-
-//    @GET("User")
-//    fun getUsers(): Observable<List<UserDto>>
-
     @GET("User")
     fun getUserByNickname(
         @Query("where") where: String

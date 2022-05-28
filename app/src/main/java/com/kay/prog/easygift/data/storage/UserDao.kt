@@ -10,7 +10,7 @@ import com.kay.prog.easygift.data.models.UserEntity
 @Dao
 interface UserDao {
     @Query("SELECT * FROM UserEntity")
-    fun getAll(): LiveData<List<UserEntity>>
+    fun getAll(): LiveData<MutableList<UserEntity>>
 
     @Query("SELECT * FROM UserEntity WHERE id = :id")
     fun getUserById(id : Long): LiveData<UserEntity>

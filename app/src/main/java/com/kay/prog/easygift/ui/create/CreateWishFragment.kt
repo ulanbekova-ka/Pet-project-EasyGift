@@ -27,12 +27,6 @@ class CreateWishFragment: BaseFragment<CreateWishVM, FragmentCreateWishBinding>(
         } catch (e: Exception) { print("Activity must implement FragmentListener")}
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.setNickname(fragmentListener.getPrefs())
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,7 +37,9 @@ class CreateWishFragment: BaseFragment<CreateWishVM, FragmentCreateWishBinding>(
     private fun setupViews() {
         with(binding) {
             saveBtn.setOnClickListener {
-                checkInput(descriptionTxt.text.toString(), urlTxt.text.toString(), priceTxt.text.toString().toIntOrNull())
+                checkInput(
+                    descriptionTxt.text.toString(), urlTxt.text.toString(), priceTxt.text.toString().toIntOrNull()
+                )
             }
         }
     }

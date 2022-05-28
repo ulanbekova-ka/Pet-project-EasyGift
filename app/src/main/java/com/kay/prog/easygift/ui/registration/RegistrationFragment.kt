@@ -48,7 +48,7 @@ class RegistrationFragment: BaseFragment<RegistrationVM, FragmentRegistrationBin
     private fun subscribeToLiveData() {
         vm.event.observe(viewLifecycleOwner) {
             when (it) {
-                is RegEvent.OnTakenNickname -> binding.nickname.error = getString(R.string.taken_nickname_error)
+                is RegEvent.OnTakenNickname -> binding.nickname.hint = getString(R.string.taken_nickname_error)
                 is RegEvent.OnSuccess -> fragmentListener.setPrefs(binding.nicknameTxt.text.toString())
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))
             }
@@ -59,31 +59,31 @@ class RegistrationFragment: BaseFragment<RegistrationVM, FragmentRegistrationBin
         binding.apply {
             when {
                 nameTxt.isNullOrEmpty() -> {
-                    name.error = getString(R.string.empty_error)
+                    name.hint = getString(R.string.empty_error)
                 }
                 surnameTxt.isNullOrEmpty() -> {
-                    surname.error = getString(R.string.empty_error)
+                    surname.hint = getString(R.string.empty_error)
                 }
                 nicknameTxt.isNullOrEmpty() -> {
-                    nickname.error = getString(R.string.empty_error)
+                    nickname.hint = getString(R.string.empty_error)
                 }
                 emailTxt.isNullOrEmpty() -> {
-                    email.error = getString(R.string.empty_error)
+                    email.hint = getString(R.string.empty_error)
                 }
                 birthdayTxt.isNullOrEmpty() -> {
-                    birthday.error = getString(R.string.empty_error)
+                    birthday.hint = getString(R.string.empty_error)
                 }
                 passwordTxt.isNullOrEmpty() -> {
-                    password.error = getString(R.string.empty_error)
-                }
-                !passwordTxt.matches(Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}\$")) -> {
-                    password.error = getString(R.string.password_format_mismatch)
+                    password.hint = getString(R.string.empty_error)
                 }
                 !birthdayTxt.matches(Regex("(^(((0[1-9]|1[0-9]|2[0-8])[/](0[1-9]|1[012]))|((29|30|31)[/](0[13578]|1[02]))|((29|30)[/](0[4,6,9]|11)))[/](19|[2-9][0-9])\\d\\d\$)|(^29[/]02[/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)\$)")) -> {
-                    birthday.error = getString(R.string.birthday_format_mismatch)
+                    birthday.hint = getString(R.string.birthday_format_mismatch)
+                }
+                !passwordTxt.matches(Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}\$")) -> {
+                    password.hint = getString(R.string.password_format_mismatch)
                 }
                 else -> {
-                    vm.saveUser(nameTxt, surnameTxt, nicknameTxt, emailTxt, birthdayTxt, passwordTxt)
+                    vm.checkNickname(nameTxt, surnameTxt, nicknameTxt, emailTxt, birthdayTxt, passwordTxt)
                 }
             }
         }

@@ -46,7 +46,9 @@ class AuthorisationFragment: BaseFragment<AuthorisationVM, FragmentAuthorisation
             when (it) {
                 is AuthEvent.OnUserNotFound -> binding.nickname.hint = getString(R.string.wrong_nickname)
                 is AuthEvent.OnWrongPassword -> binding.password.hint = getString(R.string.wrong_password)
-                is AuthEvent.OnSuccess -> fragmentListener.setPrefs(binding.nicknameTxt.text.toString())
+                is AuthEvent.OnSuccess -> {
+                    fragmentListener.setPrefs(binding.nicknameTxt.text.toString())
+                }
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))
             }
         }

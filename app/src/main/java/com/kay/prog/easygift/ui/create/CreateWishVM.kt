@@ -1,7 +1,10 @@
 package com.kay.prog.easygift.ui.create
 
+import androidx.lifecycle.LiveData
+import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.data.models.Wish
 import com.kay.prog.easygift.domain.use_cases.api.CreateWishUseCase
+import com.kay.prog.easygift.domain.use_cases.db.GetUserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.kay.prog.easygift.ui.base.BaseVM
 import com.kay.prog.easygift.ui.base.RegEvent
@@ -9,20 +12,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateWishVM @Inject constructor(
+    private val getUserInfoUseCase: GetUserInfoUseCase,
     private val createWishUseCase: CreateWishUseCase
 ): BaseVM() {
 
-    //TODO - take by id
-    private var nickname: String = ""
-    fun setNickname(nickname: String?) {
-        this.nickname = nickname ?: ""
-    }
+    private val _user: LiveData<UserEntity> = getUserInfoUseCase(1L)
+    val user: LiveData<UserEntity>
+        get() = _user
 
-    //TODO not working
     fun saveWish(description: String, url: String?, price: Int?) {
         disposable.add(
             createWishUseCase(
-                Wish(nickname, description, url, price)
+                Wish(_user.value!!.nickname, description, url, price)
             )
                 .subscribe({
                     _event.value = RegEvent.OnSuccess

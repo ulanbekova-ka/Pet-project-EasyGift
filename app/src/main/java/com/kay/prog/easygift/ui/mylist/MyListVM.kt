@@ -1,12 +1,10 @@
 package com.kay.prog.easygift.ui.mylist
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.kay.prog.easygift.data.models.UserDto
 import com.kay.prog.easygift.data.models.UserEntity
+import com.kay.prog.easygift.domain.use_cases.GetAndSaveUserUseCase
 import com.kay.prog.easygift.domain.use_cases.db.GetUsersFromDbUseCase
-import com.kay.prog.easygift.domain.use_cases.api.GetFollowedUsersUseCase
-import com.kay.prog.easygift.domain.use_cases.api.GetUserByNicknameUseCase
+import com.kay.prog.easygift.domain.use_cases.db.GetUserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.kay.prog.easygift.ui.base.BaseVM
 import com.kay.prog.easygift.ui.base.LoadingEvent
@@ -14,43 +12,28 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyListVM @Inject constructor(
-    private val getUserByNicknameUseCase: GetUserByNicknameUseCase,
-    private val getUsersFromDbUseCase : GetUsersFromDbUseCase,
-    private val getFollowedUsersUseCase: GetFollowedUsersUseCase
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+    private val getAndSaveUserUseCase: GetAndSaveUserUseCase,
+    private val getUsersFromDbUseCase : GetUsersFromDbUseCase
 ): BaseVM() {
 
-    // TODO - get the first one in Id
-    private var nickname: String = ""
-    fun setNickname(nickname: String?) {
-        this.nickname = nickname ?: ""
-
-        getUser()
-    }
-
-    private val _user = MutableLiveData<UserDto>()
-    val user: LiveData<UserDto>
+    private val _user: LiveData<UserEntity> = getUserInfoUseCase(1L)
+    val user: LiveData<UserEntity>
         get() = _user
 
-    // TODO - get from db list - delete the first one
-    val users: LiveData<List<UserEntity>> = getUsersFromDbUseCase()
+    val users: LiveData<MutableList<UserEntity>> = getUsersFromDbUseCase()
 
     fun downloadUsers() {
         _event.value = LoadingEvent.ShowLoading
 
-        getFollowedUsersUseCase(_user.value!!.followed)
-        _event.value = LoadingEvent.StopLoading
-    }
+        _user.value?.followed?.forEach { nickname ->
+            getAndSaveUserUseCase("nickname='$nickname'")
+                .doOnTerminate {
+                    _event.value = LoadingEvent.StopLoading
+                }
+                .subscribe()
+        }
 
-    private fun getUser() {
-        disposable.add(
-            getUserByNicknameUseCase("nickname='$nickname'")
-                .subscribe({
-                    if (it.size == 1) {
-                        _user.value = it[0]
-                    }
-                },{
-                    handleError(it)
-                })
-        )
+//        getFollowedUsersUseCase(_user.value!!.followed)
     }
 }
