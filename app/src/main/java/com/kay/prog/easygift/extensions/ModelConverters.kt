@@ -12,7 +12,6 @@ fun UserDto.toUserEntity(): UserEntity {
         name,
         surname,
         email,
-        password,
-        followed
+        password
     )
 }

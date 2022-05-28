@@ -90,7 +90,6 @@ class MainActivity: FragmentListener, BaseActivity<MyListVM,ActivityMainBinding>
 
     companion object {
         private const val LOGGED_IN = "logged successfully"
-        private const val KEY_NICKNAME = "nickname"
         private const val PREFS_NAME = "app preferences"
     }
 }

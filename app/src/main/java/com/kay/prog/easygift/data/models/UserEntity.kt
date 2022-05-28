@@ -13,6 +13,5 @@ data class UserEntity(
     var name: String,
     var surname: String,
     var email: String,
-    var password: String,
-    var followed: List<String>?
+    var password: String
 )

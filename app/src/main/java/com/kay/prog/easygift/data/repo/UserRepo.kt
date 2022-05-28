@@ -16,7 +16,7 @@ class UserRepo @Inject constructor(
 
     fun updateUser(where: String, user: UserDto) = userApi.updateUser(where, user)
 
-
+    fun getFollowedList(where: String) = userApi.getListOfFollowed(where)
 
     fun saveUserToDb(user: UserEntity) = userDao.insertUser(user)
 

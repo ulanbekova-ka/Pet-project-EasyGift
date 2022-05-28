@@ -55,9 +55,9 @@ class SearchFragment: BaseFragment<SearchVM, FragmentSearchBinding>(
     }
 
     private fun subscribeToLiveData() {
-        vm.users.observe(viewLifecycleOwner) {
+        vm.users.observe(viewLifecycleOwner) { users ->
             val list = mutableListOf<UserEntity>()
-            it.forEach {
+            users.forEach {
                 list.add(it.toUserEntity())
             }
             usersAdapter.setData(list)

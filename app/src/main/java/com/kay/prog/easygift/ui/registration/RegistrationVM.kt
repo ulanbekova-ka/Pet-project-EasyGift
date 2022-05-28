@@ -34,7 +34,7 @@ class RegistrationVM @Inject constructor(
     private fun postUser(name: String, surname: String, nickname: String, email: String, birthday: String, password: String) {
         disposable.add(
             createUserUseCase(
-                UserDto(birthday, null, nickname, name, surname, email, password, null)
+                UserDto(birthday, null, nickname, name, surname, email, password)
             )
                 .subscribe({
                     _event.value = RegEvent.OnSuccess

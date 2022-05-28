@@ -8,6 +8,4 @@ interface FragmentListener {
     fun setPrefs(nickname: String) {}
 
     fun deletePrefs() {}
-
-    fun getPrefs() : String? { return null }
 }

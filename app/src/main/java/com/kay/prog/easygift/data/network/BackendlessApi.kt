@@ -1,5 +1,6 @@
 package com.kay.prog.easygift.data.network
 
+import com.kay.prog.easygift.data.models.Relation
 import com.kay.prog.easygift.data.models.UserDto
 import com.kay.prog.easygift.data.models.Wish
 import io.reactivex.Observable
@@ -22,6 +23,11 @@ interface BackendlessApi {
         @Query("where") where: String,
         @Body user: UserDto
     ): Observable<Unit>
+
+    @GET("Relations")
+    fun getListOfFollowed(
+        @Query("where") where: String
+    ): Single<List<Relation>>
 
     @GET("Wishes")
     fun getWishesByNickname(

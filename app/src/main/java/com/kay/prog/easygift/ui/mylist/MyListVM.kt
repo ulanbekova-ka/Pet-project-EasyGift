@@ -3,6 +3,7 @@ package com.kay.prog.easygift.ui.mylist
 import androidx.lifecycle.LiveData
 import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.domain.use_cases.GetAndSaveUserUseCase
+import com.kay.prog.easygift.domain.use_cases.api.GetFollowedListUseCase
 import com.kay.prog.easygift.domain.use_cases.db.GetUsersFromDbUseCase
 import com.kay.prog.easygift.domain.use_cases.db.GetUserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,6 +15,7 @@ import javax.inject.Inject
 class MyListVM @Inject constructor(
     private val getUserInfoUseCase: GetUserInfoUseCase,
     private val getAndSaveUserUseCase: GetAndSaveUserUseCase,
+    private val getFollowedListUseCase: GetFollowedListUseCase,
     private val getUsersFromDbUseCase : GetUsersFromDbUseCase
 ): BaseVM() {
 
@@ -26,14 +28,20 @@ class MyListVM @Inject constructor(
     fun downloadUsers() {
         _event.value = LoadingEvent.ShowLoading
 
-        _user.value?.followed?.forEach { nickname ->
-            getAndSaveUserUseCase("nickname='$nickname'")
-                .doOnTerminate {
-                    _event.value = LoadingEvent.StopLoading
-                }
-                .subscribe()
-        }
+        disposable.add(
+            getFollowedListUseCase("nickname='${_user.value?.nickname}'")
+                .doOnTerminate { _event.value = LoadingEvent.StopLoading }
+                .subscribe({ list ->
+                    list.forEach {
+                        saveUser(it.follows)
+                    }
+                }, {
+                    handleError(it)
+                })
+        )
+    }
 
-//        getFollowedUsersUseCase(_user.value!!.followed)
+    private fun saveUser(nickname: String) {
+        getAndSaveUserUseCase("nickname='$nickname'")
     }
 }
