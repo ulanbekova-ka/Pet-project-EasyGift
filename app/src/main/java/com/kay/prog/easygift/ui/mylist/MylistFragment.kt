@@ -30,6 +30,12 @@ class MylistFragment: BaseFragment<MylistVM, FragmentMylistBinding>(
         } catch (e: Exception) { print("Activity must implement FragmentListener")}
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        vm.setNickname(fragmentListener.getPrefs())
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,6 +60,10 @@ class MylistFragment: BaseFragment<MylistVM, FragmentMylistBinding>(
     private fun subscribeToLiveData() {
         vm.users.observe(viewLifecycleOwner) {
             usersAdapter.setData(it)
+        }
+
+        vm.user.observe(viewLifecycleOwner) {
+            vm.downloadUsers()
         }
 
         vm.event.observe(viewLifecycleOwner) {

@@ -1,6 +1,6 @@
 package com.kay.prog.easygift.ui.registration
 
-import com.kay.prog.easygift.data.models.UserEntity
+import com.kay.prog.easygift.data.models.UserDto
 import com.kay.prog.easygift.domain.use_cases.api.CreateUserUseCase
 import com.kay.prog.easygift.domain.use_cases.api.GetUserByNicknameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,7 +47,7 @@ class RegistrationVM @Inject constructor(
 
         disposable.add(
             createUserUseCase(
-                UserEntity(null, birthday, null, nickname, name, surname, email, password)
+                UserDto(birthday, null, nickname, name, surname, email, password, null)
             )
                 .subscribe({
                     _event.value = RegEvent.OnRegSuccess

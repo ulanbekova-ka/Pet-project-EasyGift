@@ -15,9 +15,9 @@ interface UserDao {
     @Query("SELECT * FROM UserEntity WHERE id = :id")
     fun getUserById(id : Long): LiveData<UserEntity>
 
-    @Query("SELECT * FROM UserEntity WHERE nickname = :nickname")
-    fun getUsersByNickname(nickname: String): LiveData<List<UserEntity>>
+//    @Insert(onConflict = REPLACE)
+//    fun insertList(users: List<UserEntity>)
 
-    @Insert(onConflict = REPLACE)
-    fun insertList(users: List<UserEntity>)
+    @Insert
+    fun insert(user: UserEntity)
 }

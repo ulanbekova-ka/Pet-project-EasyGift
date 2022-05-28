@@ -1,5 +1,6 @@
 package com.kay.prog.easygift.data.repo
 
+import com.kay.prog.easygift.data.models.UserDto
 import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.data.network.BackendlessApi
 import com.kay.prog.easygift.data.storage.UserDao
@@ -10,19 +11,18 @@ class UserRepo @Inject constructor(
     private var userApi: BackendlessApi
 ) {
 
-    fun getUsersFromApi() = userApi.getUsers()
+//    fun getUsersFromApi() = userApi.getUsers()
 
     fun getUserByNickname(where: String) = userApi.getUserByNickname(where)
 
-    fun createUser(user: UserEntity) = userApi.createUser(user)
+    fun createUser(user: UserDto) = userApi.createUser(user)
 
-    fun updateUser(where: String, user: UserEntity) = userApi.updateUser(where, user)
+    fun updateUser(where: String, user: UserDto) = userApi.updateUser(where, user)
 
 
 
-    fun saveUsersToDb(users: List<UserEntity>) {
-        userDao.insertList(users)
-    }
+    fun saveUserToDb(user: UserEntity) = userDao.insert(user)
+//    fun saveUsersToDb(users: List<UserEntity>) = userDao.insertList(users)
 
     fun getUsersFromDB() = userDao.getAll()
 

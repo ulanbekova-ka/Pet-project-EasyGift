@@ -8,7 +8,6 @@ import com.kay.prog.easygift.R
 import com.kay.prog.easygift.databinding.FragmentAuthorisationBinding
 import com.kay.prog.easygift.extensions.showToast
 import com.kay.prog.easygift.ui.base.*
-import com.kay.prog.easygift.ui.mylist.MylistFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,10 +47,7 @@ class AuthorisationFragment: BaseFragment<AuthorisationVM, FragmentAuthorisation
             when (it) {
                 is BaseEvent.ShowToast -> showToast(it.message)
                 is AuthEvent.OnAuthError -> showToast("Wrong nickname or password")
-                is AuthEvent.OnAuthSuccess -> {
-                    fragmentListener.setPrefs(binding.nickname.text.toString())
-                    fragmentListener.openFragment(MylistFragment(), false)
-                }
+                is AuthEvent.OnAuthSuccess -> fragmentListener.setPrefs(binding.nickname.text.toString())
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))
             }
         }

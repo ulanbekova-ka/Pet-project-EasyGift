@@ -7,7 +7,7 @@ import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.extensions.TypeListConverter
 
 @TypeConverters(TypeListConverter::class)
-@Database(entities = [UserEntity::class], version = 5)
+@Database(entities = [UserEntity::class], version = 8)
 abstract class AppDatabase: RoomDatabase()  {
 
     abstract fun userDao(): UserDao

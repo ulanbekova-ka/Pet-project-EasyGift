@@ -24,7 +24,7 @@ class CreateWishVM @Inject constructor(
         }
 
         disposable.add(
-            createWishUseCase( Wish(null, nickname, description, url, price) )
+            createWishUseCase( Wish(nickname, description, url, price) )
                 .subscribe({
                     _event.value = RegEvent.OnRegSuccess
                 }, {

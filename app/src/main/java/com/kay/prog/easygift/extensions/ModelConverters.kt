@@ -5,7 +5,7 @@ import com.kay.prog.easygift.data.models.UserEntity
 
 fun UserDto.toUserEntity(): UserEntity {
     return UserEntity(
-        id,
+        null,
         birthday,
         avatar,
         nickname,

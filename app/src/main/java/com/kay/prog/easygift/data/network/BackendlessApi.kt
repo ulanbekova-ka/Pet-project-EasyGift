@@ -1,17 +1,15 @@
 package com.kay.prog.easygift.data.network
 
 import com.kay.prog.easygift.data.models.UserDto
-import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.data.models.Wish
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.*
 
-
 interface BackendlessApi {
 
-    @GET("User")
-    fun getUsers(): Observable<List<UserDto>>
+//    @GET("User")
+//    fun getUsers(): Observable<List<UserDto>>
 
     @GET("User")
     fun getUserByNickname(
@@ -20,16 +18,14 @@ interface BackendlessApi {
 
     @POST("User")
     fun createUser(
-        @Body user: UserEntity
+        @Body user: UserDto
     ): Observable<Unit>
 
     @PUT("User")
     fun updateUser(
         @Query("where") where: String,
-        @Body user: UserEntity
+        @Body user: UserDto
     ): Observable<Unit>
-
-
 
     @GET("Wishes")
     fun getWishesByNickname(
