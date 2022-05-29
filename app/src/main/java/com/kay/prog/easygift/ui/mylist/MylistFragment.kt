@@ -40,7 +40,7 @@ class MylistFragment: BaseFragment<MylistVM, FragmentMylistBinding>(
     private fun setupViews() {
         with(binding) {
             usersAdapter = UsersAdapter {
-                fragmentListener.openFragment(DetailFragment.newInstance(it.nickname))
+                fragmentListener.openFragment(DetailFragment.newInstance(it.nickname), false)
             }
 
             recycler.adapter = usersAdapter

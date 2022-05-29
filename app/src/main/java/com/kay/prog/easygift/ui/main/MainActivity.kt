@@ -43,19 +43,19 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
         binding.navigation.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.nav_home -> {
-                    openFragment(MylistFragment())
+                    openFragment(MylistFragment(), false)
                     true
                 }
                 R.id.nav_create -> {
-                    openFragment(CreateWishFragment())
+                    openFragment(CreateWishFragment(), false)
                     true
                 }
                 R.id.nav_search -> {
-                    openFragment(SearchFragment())
+                    openFragment(SearchFragment(), false)
                     true
                 }
                 R.id.nav_profile -> {
-                    openFragment(ProfileFragment())
+                    openFragment(ProfileFragment(), false)
                     true
                 }
                 else -> false

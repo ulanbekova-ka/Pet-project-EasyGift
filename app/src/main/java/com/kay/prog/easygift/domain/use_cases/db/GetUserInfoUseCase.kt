@@ -9,7 +9,7 @@ class GetUserInfoUseCase @Inject constructor(
     private val userRepo: UserRepo
 ) {
 
-    operator fun invoke(id: Long): LiveData<UserEntity> {
-        return userRepo.getUserInfo(id)
+    operator fun invoke(nickname: String): LiveData<UserEntity> {
+        return userRepo.getUserInfo(nickname)
     }
 }

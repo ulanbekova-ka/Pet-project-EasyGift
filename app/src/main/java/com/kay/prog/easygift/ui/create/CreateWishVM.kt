@@ -1,5 +1,6 @@
 package com.kay.prog.easygift.ui.create
 
+import android.util.Log
 import com.kay.prog.easygift.data.models.Wish
 import com.kay.prog.easygift.domain.use_cases.api.CreateWishUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
