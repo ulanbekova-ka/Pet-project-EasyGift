@@ -5,10 +5,11 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class UserEntity(
-    @PrimaryKey(autoGenerate = true)
-    var id: Long?,
+//    @PrimaryKey(autoGenerate = true)
+//    var id: Long? = null,
     var birthday: String,
     var avatar: String?,
+    @PrimaryKey
     var nickname: String,
     var name: String,
     var surname: String,

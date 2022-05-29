@@ -6,6 +6,7 @@ import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.data.models.Wish
 import com.kay.prog.easygift.domain.use_cases.api.GetWishesByNicknameUseCase
 import com.kay.prog.easygift.domain.use_cases.api.GetUserByNicknameUseCase
+import com.kay.prog.easygift.domain.use_cases.db.ClearTableUseCase
 import com.kay.prog.easygift.extensions.toUserEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.kay.prog.easygift.ui.base.BaseVM
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileVM @Inject constructor(
     private val getUserByNicknameUseCase: GetUserByNicknameUseCase,
-    private val getWishesByNicknameUseCase: GetWishesByNicknameUseCase
+    private val getWishesByNicknameUseCase: GetWishesByNicknameUseCase,
+    private val clearTableUseCase: ClearTableUseCase
 ): BaseVM() {
 
     private var nickname: String = ""
@@ -61,12 +63,12 @@ class ProfileVM @Inject constructor(
         )
     }
 
-//    fun deleteUsers() {
-//        disposable.add(
-//            clearTableUseCase()
-//                .subscribe ({}, {
-//                    handleError(it)
-//                })
-//        )
-//    }
+    fun deleteUsers() {
+        disposable.add(
+            clearTableUseCase()
+                .subscribe({}, {
+                    handleError(it)
+                })
+        )
+    }
 }

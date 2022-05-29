@@ -31,6 +31,10 @@ class AuthorisationVM @Inject constructor(
     }
 
     private fun checkPassword(password: String) {
+        if (_user.value == null) {
+            AuthEvent.OnUserNotFound
+        }
+
         if (_user.value?.password != password) {
             _event.value = AuthEvent.OnWrongPassword
         } else {

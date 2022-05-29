@@ -30,7 +30,7 @@ class UserRepo @Inject constructor(
 
     fun getUsersFromDB() = userDao.getAll()
 
-    fun getUserInfo(id: Long) = userDao.getUserById(id)
+    fun getUserInfo(nickname: String) = userDao.getUserByNickname(nickname)
 
-//    fun deleteUsersFromDb() = userDao.deleteAll()
+    fun deleteUsersFromDb() = userDao.deleteAll()
 }

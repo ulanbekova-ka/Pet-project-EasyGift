@@ -54,7 +54,7 @@ class CreateWishFragment: BaseFragment<CreateWishVM, FragmentCreateWishBinding>(
         vm.event.observe(viewLifecycleOwner) {
             when (it) {
                 is RegEvent.OnSuccess -> {
-                    fragmentListener.openFragment(ProfileFragment())
+                    fragmentListener.openFragment(ProfileFragment(), false)
                 }
                 else -> Log.e("DEBUG", getString(R.string.unknown_error))
             }

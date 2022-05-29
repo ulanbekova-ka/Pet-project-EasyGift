@@ -43,7 +43,7 @@ class SearchFragment: BaseFragment<SearchVM, FragmentSearchBinding>(
     private fun setupViews() {
         with(binding) {
             usersAdapter = UsersAdapter {
-                fragmentListener.openFragment(DetailFragment.newInstance(it.nickname))
+                fragmentListener.openFragment(DetailFragment.newInstance(it.nickname), false)
             }
 
             recycler.adapter = usersAdapter
