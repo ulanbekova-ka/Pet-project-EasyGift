@@ -1,5 +1,7 @@
 package com.kay.prog.easygift.data.repo
 
+import com.kay.prog.easygift.data.models.Relation
+import com.kay.prog.easygift.data.models.UserDto
 import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.data.network.BackendlessApi
 import com.kay.prog.easygift.data.storage.UserDao
@@ -14,11 +16,13 @@ class UserRepo @Inject constructor(
 
     fun getUserByNickname(where: String) = userApi.getUserByNickname(where)
 
-    fun createUser(user: UserEntity) = userApi.createUser(user)
+    fun createUser(user: UserDto) = userApi.createUser(user)
 
-    fun updateUser(where: String, user: UserEntity) = userApi.updateUser(where, user)
+    fun updateUser(where: String, user: UserDto) = userApi.updateUser(where, user)
 
+    fun getFollowedList(where: String) = userApi.getListOfFollowed(where)
 
+    fun follow(relation: Relation) = userApi.follow(relation)
 
     fun saveUsersToDb(users: List<UserEntity>) {
         userDao.insertList(users)
@@ -26,5 +30,7 @@ class UserRepo @Inject constructor(
 
     fun getUsersFromDB() = userDao.getAll()
 
-    fun getUserById(id : Long) = userDao.getUserById(id)
+    fun getUserInfo(id: Long) = userDao.getUserById(id)
+
+//    fun deleteUsersFromDb() = userDao.deleteAll()
 }

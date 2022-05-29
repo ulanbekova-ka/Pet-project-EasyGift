@@ -10,6 +10,6 @@ class GetUserInfoUseCase @Inject constructor(
 ) {
 
     operator fun invoke(id: Long): LiveData<UserEntity> {
-        return userRepo.getUserById(id)
+        return userRepo.getUserInfo(id)
     }
 }

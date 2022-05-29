@@ -17,16 +17,11 @@ class CreateWishVM @Inject constructor(
         this.nickname = nickname ?: ""
     }
 
-    fun saveWish(description: String?, url: String?, price: Double?) {
-        if (description.isNullOrEmpty()) {
-            _event.value = RegEvent.OnEmptyFields
-            return
-        }
-
+    fun saveWish(description: String, url: String?, price: String?) {
         disposable.add(
-            createWishUseCase( Wish(null, nickname, description, url, price) )
+            createWishUseCase( Wish(nickname, description, url, price) )
                 .subscribe({
-                    _event.value = RegEvent.OnRegSuccess
+                    _event.value = RegEvent.OnSuccess
                 }, {
                     handleError(it)
                 })

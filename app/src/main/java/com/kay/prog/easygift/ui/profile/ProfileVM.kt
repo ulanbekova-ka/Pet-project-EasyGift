@@ -7,7 +7,6 @@ import com.kay.prog.easygift.data.models.Wish
 import com.kay.prog.easygift.domain.use_cases.api.GetWishesByNicknameUseCase
 import com.kay.prog.easygift.domain.use_cases.api.GetUserByNicknameUseCase
 import com.kay.prog.easygift.extensions.toUserEntity
-import com.kay.prog.easygift.ui.base.AuthEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.kay.prog.easygift.ui.base.BaseVM
 import com.kay.prog.easygift.ui.base.LoadingEvent
@@ -41,8 +40,6 @@ class ProfileVM @Inject constructor(
                 .subscribe({
                     if (it.size == 1) {
                         _user.value = it[0].toUserEntity()
-                    } else {
-                        _event.value = AuthEvent.OnAuthError
                     }
                 },{
                     handleError(it)
@@ -63,4 +60,13 @@ class ProfileVM @Inject constructor(
                 })
         )
     }
+
+//    fun deleteUsers() {
+//        disposable.add(
+//            clearTableUseCase()
+//                .subscribe ({}, {
+//                    handleError(it)
+//                })
+//        )
+//    }
 }

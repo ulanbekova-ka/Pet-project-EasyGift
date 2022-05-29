@@ -2,7 +2,6 @@ package com.kay.prog.easygift.ui.main
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.kay.prog.easygift.R
@@ -34,11 +33,33 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
             openFragment(MainFragment(), false)
             binding.navigation.visibility = View.GONE
         } else {
-            openFragment(MylistFragment(), false)
+            openFragment(MylistFragment())
         }
 
-        binding.navigation.setOnItemSelectedListener {
-            onOptionsItemSelected(it)
+        setNavigationView()
+    }
+
+    private fun setNavigationView() {
+        binding.navigation.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.nav_home -> {
+                    openFragment(MylistFragment())
+                    true
+                }
+                R.id.nav_create -> {
+                    openFragment(CreateWishFragment())
+                    true
+                }
+                R.id.nav_search -> {
+                    openFragment(SearchFragment())
+                    true
+                }
+                R.id.nav_profile -> {
+                    openFragment(ProfileFragment())
+                    true
+                }
+                else -> false
+            }
         }
     }
 
@@ -53,20 +74,10 @@ class MainActivity: FragmentListener, BaseActivity<MylistVM,ActivityMainBinding>
             .commit()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.nav_home -> openFragment(MylistFragment(), false)
-            R.id.nav_create -> openFragment(CreateWishFragment(), false)
-            R.id.nav_search -> openFragment(SearchFragment(), false)
-            R.id.nav_profile -> openFragment(ProfileFragment(), false)
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun setPrefs(nickname: String) {
         val editor = prefs.edit()
         editor.putBoolean(LOGGED_IN, true).apply()
-        editor.putString(KEY_NICKNAME, nickname)
+        editor.putString(KEY_NICKNAME, nickname).apply()
 
         openFragment(MylistFragment(), false)
         binding.navigation.visibility = View.VISIBLE

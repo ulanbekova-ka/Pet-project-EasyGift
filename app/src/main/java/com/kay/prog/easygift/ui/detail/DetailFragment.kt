@@ -56,14 +56,14 @@ class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
             }
 
             subscribeBtn.setOnClickListener {
-                showToast("Подписка прошла успешно")
+//                vm.follow()
+                showToast("Follow!")
             }
         }
     }
 
     private fun subscribeToLiveData() {
         vm.user.observe(viewLifecycleOwner) {
-
             with(binding) {
                 Glide.with(requireContext()).load(it.avatar?: R.drawable.ic_avatar).into(profAvatar)
                 nickname.text = it.nickname
