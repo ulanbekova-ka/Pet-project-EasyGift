@@ -7,7 +7,7 @@
     <string name="finished_loading">LOADING STOPPED</string>
 
     <string name="full_name">%s %s</string>
-    <string name="price">%d сом</string>
+    <string name="price">%s сом</string>
     <string name="left">осталось %d дней</string>
 
     <string name="home">дом</string>

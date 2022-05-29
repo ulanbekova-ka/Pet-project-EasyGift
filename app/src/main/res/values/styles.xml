@@ -15,6 +15,8 @@
         <item name="android:layout_width">0dp</item>
         <item name="endIconMode">clear_text</item>
         <item name="endIconTint">@color/purple_500</item>
+        <item name="helperTextEnabled">true</item>
+        <item name="helperTextTextColor">@color/purple_200</item>
         <item name="boxBackgroundColor">@color/purple_100</item>
         <item name="android:textColorHint">@color/purple_500</item>
         <item name="boxStrokeColor">@color/purple_500</item>

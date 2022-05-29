@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.kay.prog.easygift.R
-import com.kay.prog.easygift.data.models.UserEntity
+import com.kay.prog.easygift.data.models.User
 import com.kay.prog.easygift.databinding.FragmentSearchBinding
 import com.kay.prog.easygift.extensions.toUserEntity
 import com.kay.prog.easygift.ui.base.BaseFragment
@@ -43,7 +43,7 @@ class SearchFragment: BaseFragment<SearchVM, FragmentSearchBinding>(
     private fun setupViews() {
         with(binding) {
             usersAdapter = UsersAdapter {
-                fragmentListener.openFragment(DetailFragment.newInstance(it.id ?: 1L))
+                fragmentListener.openFragment(DetailFragment.newInstance(it.nickname))
             }
 
             recycler.adapter = usersAdapter
@@ -56,7 +56,7 @@ class SearchFragment: BaseFragment<SearchVM, FragmentSearchBinding>(
 
     private fun subscribeToLiveData() {
         vm.users.observe(viewLifecycleOwner) { users ->
-            val list = mutableListOf<UserEntity>()
+            val list = mutableListOf<User>()
             users.forEach {
                 list.add(it.toUserEntity())
             }

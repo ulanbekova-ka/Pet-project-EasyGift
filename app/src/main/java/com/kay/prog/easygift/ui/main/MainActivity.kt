@@ -32,7 +32,7 @@ class MainActivity: FragmentListener, BaseActivity<MyListVM,ActivityMainBinding>
             openFragment(MainFragment(), false)
             binding.navigation.visibility = View.GONE
         } else {
-            openFragment(MyListFragment(), false)
+            openFragment(MyListFragment())
         }
 
         setNavigationView()
@@ -42,19 +42,19 @@ class MainActivity: FragmentListener, BaseActivity<MyListVM,ActivityMainBinding>
         binding.navigation.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.nav_home -> {
-                    openFragment(MyListFragment(), false)
+                    openFragment(MyListFragment())
                     true
                 }
                 R.id.nav_create -> {
-                    openFragment(CreateWishFragment(), false)
+                    openFragment(CreateWishFragment())
                     true
                 }
                 R.id.nav_search -> {
-                    openFragment(SearchFragment(), false)
+                    openFragment(SearchFragment())
                     true
                 }
                 R.id.nav_profile -> {
-                    openFragment(ProfileFragment(), false)
+                    openFragment(ProfileFragment())
                     true
                 }
                 else -> false

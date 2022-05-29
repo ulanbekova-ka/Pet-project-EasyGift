@@ -1,7 +1,7 @@
 package com.kay.prog.easygift.ui.mylist
 
 import androidx.lifecycle.LiveData
-import com.kay.prog.easygift.data.models.UserEntity
+import com.kay.prog.easygift.data.models.User
 import com.kay.prog.easygift.domain.use_cases.GetAndSaveUserUseCase
 import com.kay.prog.easygift.domain.use_cases.api.GetFollowedListUseCase
 import com.kay.prog.easygift.domain.use_cases.db.GetUsersFromDbUseCase
@@ -19,11 +19,11 @@ class MyListVM @Inject constructor(
     private val getUsersFromDbUseCase : GetUsersFromDbUseCase
 ): BaseVM() {
 
-    private val _user: LiveData<UserEntity> = getUserInfoUseCase(1L)
-    val user: LiveData<UserEntity>
+    private val _user: LiveData<User> = getUserInfoUseCase(1L)
+    val user: LiveData<User>
         get() = _user
 
-    val users: LiveData<MutableList<UserEntity>> = getUsersFromDbUseCase()
+    val users: LiveData<MutableList<User>> = getUsersFromDbUseCase()
 
     fun downloadUsers() {
         _event.value = LoadingEvent.ShowLoading

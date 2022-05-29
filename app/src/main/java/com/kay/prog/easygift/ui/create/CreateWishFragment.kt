@@ -59,7 +59,7 @@ class CreateWishFragment: BaseFragment<CreateWishVM, FragmentCreateWishBinding>(
         binding.apply {
             when {
                 descriptionTxt.isNullOrEmpty() -> {
-                    description.error = getString(R.string.empty_error)
+                    description.helperText = getString(R.string.empty_error)
                 }
                 else -> {
                     vm.saveWish(descriptionTxt, urlTxt, priceTxt)

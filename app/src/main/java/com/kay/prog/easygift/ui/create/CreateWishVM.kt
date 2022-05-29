@@ -1,7 +1,7 @@
 package com.kay.prog.easygift.ui.create
 
 import androidx.lifecycle.LiveData
-import com.kay.prog.easygift.data.models.UserEntity
+import com.kay.prog.easygift.data.models.User
 import com.kay.prog.easygift.data.models.Wish
 import com.kay.prog.easygift.domain.use_cases.api.CreateWishUseCase
 import com.kay.prog.easygift.domain.use_cases.db.GetUserInfoUseCase
@@ -16,8 +16,8 @@ class CreateWishVM @Inject constructor(
     private val createWishUseCase: CreateWishUseCase
 ): BaseVM() {
 
-    private val _user: LiveData<UserEntity> = getUserInfoUseCase(1L)
-    val user: LiveData<UserEntity>
+    private val _user: LiveData<User> = getUserInfoUseCase(1L)
+    val user: LiveData<User>
         get() = _user
 
     fun saveWish(description: String, url: String?, price: String?) {

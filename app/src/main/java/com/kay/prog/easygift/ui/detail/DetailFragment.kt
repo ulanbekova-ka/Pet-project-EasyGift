@@ -33,7 +33,12 @@ class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        vm.setId(arguments?.getLong(KEY_ID) ?: 1L)
+        val id = arguments?.getLong((KEY_ID))
+        if (id != null) {
+            vm.getUser(id)
+        } else {
+            vm.loadUser(arguments?.getString(KEY_NICK))
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -84,9 +89,19 @@ class DetailFragment: BaseFragment< DetailVM, FragmentDetailBinding>(
 
     companion object {
         private const val KEY_ID = "id"
+        private const val KEY_NICK = "nickname"
+
+        fun newInstance(nickname: String): DetailFragment {
+            val args = Bundle().apply {
+                putString(KEY_NICK, nickname)
+            }
+            return DetailFragment().apply { arguments = args }
+        }
 
         fun newInstance(id: Long): DetailFragment {
-            val args = Bundle().apply { putLong(KEY_ID, id) }
+            val args = Bundle().apply {
+                putLong(KEY_ID, id)
+            }
             return DetailFragment().apply { arguments = args }
         }
     }

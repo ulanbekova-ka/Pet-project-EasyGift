@@ -15,10 +15,10 @@ class GetAndSaveUserUseCase @Inject constructor(
         return userRepo.getUserByNickname(where)
             .subscribeOn(Schedulers.io())
             .map {
-                it[0].toUserEntity()
-            }
-            .map {
-                userRepo.saveUserToDb(it)
+                if (it.size == 1) {
+                    val user = it[0].toUserEntity()
+                    userRepo.saveUserToDb(user)
+                }
             }
             .observeOn(AndroidSchedulers.mainThread())
     }

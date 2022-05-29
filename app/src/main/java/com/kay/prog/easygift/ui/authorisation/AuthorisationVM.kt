@@ -1,7 +1,7 @@
 package com.kay.prog.easygift.ui.authorisation
 
 import androidx.lifecycle.MutableLiveData
-import com.kay.prog.easygift.data.models.UserEntity
+import com.kay.prog.easygift.data.models.User
 import com.kay.prog.easygift.domain.use_cases.GetAndSaveUserUseCase
 import com.kay.prog.easygift.domain.use_cases.api.GetUserByNicknameUseCase
 import com.kay.prog.easygift.extensions.toUserEntity
@@ -16,7 +16,7 @@ class AuthorisationVM @Inject constructor(
     private val getAndSaveUserUseCase: GetAndSaveUserUseCase
 ): BaseVM() {
 
-    private val _user = MutableLiveData<UserEntity>()
+    private val _user = MutableLiveData<User>()
 
     fun findUser(nickname: String, password: String) {
         disposable.add(

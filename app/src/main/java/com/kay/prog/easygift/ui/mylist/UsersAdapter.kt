@@ -6,17 +6,17 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kay.prog.easygift.R
-import com.kay.prog.easygift.data.models.UserEntity
+import com.kay.prog.easygift.data.models.User
 import com.kay.prog.easygift.databinding.ItemUserBinding
 import com.kay.prog.easygift.extensions.countDaysLeft
 
 class UsersAdapter(
-    private val click: (user: UserEntity) -> Unit
+    private val click: (user: User) -> Unit
 ) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
-    private var list: List<UserEntity> = listOf()
+    private var list: List<User> = listOf()
 
-    fun setData(list: List<UserEntity>) {
+    fun setData(list: List<User>) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -36,10 +36,10 @@ class UsersAdapter(
 
     class ViewHolder(
         private val binding : ItemUserBinding,
-        private val click: (user: UserEntity) -> Unit
+        private val click: (user: User) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(user: UserEntity) {
+        fun bind(user: User) {
             binding.apply {
                 val icon = user.avatar ?: ContextCompat.getDrawable(itemView.context, R.drawable.ic_avatar)
                 Glide.with(itemView.context).load(icon).into(avatar)

@@ -2,7 +2,7 @@ package com.kay.prog.easygift.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.kay.prog.easygift.data.models.UserEntity
+import com.kay.prog.easygift.data.models.User
 import com.kay.prog.easygift.data.models.Wish
 import com.kay.prog.easygift.domain.use_cases.api.GetWishesByNicknameUseCase
 import com.kay.prog.easygift.domain.use_cases.db.ClearTableUseCase
@@ -19,8 +19,8 @@ class ProfileVM @Inject constructor(
     private val clearTableUseCase: ClearTableUseCase
 ): BaseVM() {
 
-    private val _user: LiveData<UserEntity> = getUserInfoUseCase(1L)
-    val user: LiveData<UserEntity>
+    private val _user: LiveData<User> = getUserInfoUseCase(1L)
+    val user: LiveData<User>
         get() = _user
 
     private val _wishList = MutableLiveData<List<Wish>>()
