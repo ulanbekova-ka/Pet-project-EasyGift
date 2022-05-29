@@ -25,8 +25,8 @@ open class BaseVM @Inject constructor() : ViewModel() {
 
     protected fun handleError(it: Throwable) {
         _event.value = when (it) {
-            is UnknownHostException -> LoadingEvent.ShowToast(R.string.no_internet)
-            else -> LoadingEvent.ShowToast(R.string.unknown_error)
+            is UnknownHostException -> BaseEvent.ShowToast(R.string.no_internet)
+            else -> BaseEvent.ShowToast(R.string.unknown_error)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.kay.prog.easygift.data.network
 
+import com.kay.prog.easygift.data.models.Relation
 import com.kay.prog.easygift.data.models.UserDto
 import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.data.models.Wish
@@ -20,16 +21,24 @@ interface BackendlessApi {
 
     @POST("User")
     fun createUser(
-        @Body user: UserEntity
+        @Body user: UserDto
     ): Observable<Unit>
 
     @PUT("User")
     fun updateUser(
         @Query("where") where: String,
-        @Body user: UserEntity
+        @Body user: UserDto
     ): Observable<Unit>
 
+    @GET("Relations")
+    fun getListOfFollowed(
+        @Query("where") where: String
+    ): Single<List<Relation>>
 
+    @POST("Relations")
+    fun follow(
+        @Body relation: Relation
+    ): Observable<Unit>
 
     @GET("Wishes")
     fun getWishesByNickname(

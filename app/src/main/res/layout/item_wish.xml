@@ -13,12 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textSize="16sp"
+            style="@style/MyTextViewStyle"
             tool:text="компьютерная мышка. особо без разницы какая, главное не дорогая, не для игр"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintBottom_toTopOf="@id/webpage"
@@ -26,26 +23,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/webpage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:gravity="center"
-            android:textColor="@color/purple_700"
-            android:textSize="16sp"
+            style="@style/MyTextViewStyle"
+            android:textColor="@color/blue"
+            android:textStyle="normal"
             tool:text="http://www.gadget.kg/catalog/gadzhety/vneshnie-zaryadkipowerbank"
             app:layout_constraintBottom_toTopOf="@id/price"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="16sp"
+            style="@style/MyTextViewStyle"
             tool:text="@string/price"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
