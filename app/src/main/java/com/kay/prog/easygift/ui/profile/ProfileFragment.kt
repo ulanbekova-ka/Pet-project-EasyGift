@@ -64,7 +64,7 @@ class ProfileFragment: BaseFragment<ProfileVM, FragmentProfileBinding>(
             logOutBtn.setOnClickListener {
                 fragmentListener.openFragment(MainFragment(), false)
                 fragmentListener.deletePrefs()
-//                vm.deleteUsers()
+                vm.deleteUsers()
             }
         }
     }

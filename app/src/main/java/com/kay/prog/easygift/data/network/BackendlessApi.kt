@@ -2,7 +2,6 @@ package com.kay.prog.easygift.data.network
 
 import com.kay.prog.easygift.data.models.Relation
 import com.kay.prog.easygift.data.models.UserDto
-import com.kay.prog.easygift.data.models.UserEntity
 import com.kay.prog.easygift.data.models.Wish
 import io.reactivex.Observable
 import io.reactivex.Single
